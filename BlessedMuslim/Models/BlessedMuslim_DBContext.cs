@@ -36,7 +36,7 @@ namespace BlessedMuslim.Models
             if (!optionsBuilder.IsConfigured)
             {
                 IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
+                //.SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
                 .AddJsonFile("appsettings.json")
                 .Build();
                 optionsBuilder.UseSqlServer(configuration.GetConnectionString("MBDbConstr"));
