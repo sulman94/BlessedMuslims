@@ -1,0 +1,204 @@
+﻿@model BlessedMuslim.Models.Charity;
+@{
+    ViewData["Title"] = "View Charity";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>View Charity</h4>
+        <hr />
+        <div class="row">
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Charity Code</span>
+                    </div>
+                    @Html.EditorFor(model => model.CharityId, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Business Name</span>
+                    </div>
+                    @Html.EditorFor(model => model.BusinessName, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
+                </div>
+            </div>
+
+            <div class="col-12 col-md-12">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Address Line 1</span>
+                    </div>
+                    @Html.EditorFor(model => model.AddressLine1, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", @disabled = "disabled" }
+               })
+                </div>
+            </div>
+
+            <div class="col-12 col-md-12">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Address Line 2</span>
+                    </div>
+                    @Html.EditorFor(model => model.AddressLine2, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", @disabled = "disabled" }
+               })
+                </div>
+            </div>
+
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Post Code</span>
+                    </div>
+                    @Html.EditorFor(model => model.PostCode, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", @disabled = "disabled" }
+               })
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Email</span>
+                    </div>
+                    @Html.EditorFor(model => model.Email, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", @disabled = "disabled" }
+               })
+                </div>
+            </div>
+
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Contact Person</span>
+                    </div>
+                    @Html.EditorFor(model => model.ContactPerson, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", @disabled = "disabled" }
+               })
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Landline</span>
+                    </div>
+                    @Html.EditorFor(model => model.Landline, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", @disabled = "disabled" }
+               })
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Mobile Number</span>
+                    </div>
+                    @Html.EditorFor(model => model.MobileNumber, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", @disabled = "disabled" }
+               })
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Joining Date</span>
+                    </div>
+                    @Html.EditorFor(model => model.JoiningDate, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", @disabled = "disabled" }
+               })
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Bank Name</span>
+                    </div>
+                    @Html.EditorFor(model => model.BankName, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", @disabled = "disabled" }
+               })
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Account Number</span>
+                    </div>
+                    @Html.EditorFor(model => model.AccountNumber, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", @disabled = "disabled" }
+               })
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Sort Code</span>
+                    </div>
+                    @Html.EditorFor(model => model.SortCode, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", @disabled = "disabled" }
+               })
+                </div>
+            </div>
+        </div>
+
+        <a asp-action="Index">Back to List</a>
+
+        @if (!String.IsNullOrEmpty(ViewBag.error))
+        {
+            <div class="mt-2">
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.error
+                </div>
+            </div>
+        }
+
+        @if (!String.IsNullOrEmpty(ViewBag.result))
+        {
+            <div class="mt-2">
+                <div class="alert alert-success" role="alert">
+                    @ViewBag.result
+                </div>
+            </div>
+        }
+
+    </div>
+}
+

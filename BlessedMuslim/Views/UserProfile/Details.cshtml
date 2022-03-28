@@ -1,0 +1,113 @@
+﻿@model BlessedMuslim.Models.Users;
+@{
+    ViewData["Title"] = "View Users";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>View Users</h4>
+        <hr />
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Sales Rep?</span>
+                    </div>
+                    @Html.CheckBox("cbSalesReps", false, new { @class = "form-control", @disabled = "disabled" })
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Sales Rep</span>
+                    </div>
+                    @Html.DropDownListFor(model => model.Id, (IEnumerable<SelectListItem>)ViewBag.SalesRep, "--- Select From Sales Rep List ---", new { @class = "form-control", required = "required", @disabled = "disabled" })
+                </div>
+            </div>
+
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">City Name</span>
+                    </div>
+                    @Html.EditorFor(model => model.Name, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", required = "required", autocomplete = "off", @disabled = "disabled" }
+               })
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Role</span>
+                    </div>
+                    @Html.DropDownListFor(model => model.RoleId, (IEnumerable<SelectListItem>)ViewBag.RoleId, "--- Select Role ---", new { @class = "form-control", required = "required", @disabled = "disabled" })
+
+                </div>
+            </div>
+
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Email</span>
+                    </div>
+                    @Html.EditorFor(model => model.Email, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", required = "required", autocomplete = "off", @disabled = "disabled" }
+               })
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Password</span>
+                    </div>
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", autocomplete = "off", @disabled = "disabled" })
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Phone Number</span>
+                    </div>
+                    @Html.EditorFor(model => model.Phone, new
+               {
+                   htmlAttributes =
+                                new { @class = "form-control", required = "required", autocomplete = "off", @disabled = "disabled" }
+               })
+                </div>
+            </div>
+        </div>
+
+        <a asp-action="Index">Back to List</a>
+
+        @if (!String.IsNullOrEmpty(ViewBag.error))
+        {
+            <div class="mt-2">
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.error
+                </div>
+            </div>
+        }
+
+        @if (!String.IsNullOrEmpty(ViewBag.result))
+        {
+            <div class="mt-2">
+                <div class="alert alert-success" role="alert">
+                    @ViewBag.result
+                </div>
+            </div>
+        }
+
+    </div>
+}
+

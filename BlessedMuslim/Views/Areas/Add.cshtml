@@ -1,0 +1,98 @@
+﻿@model BlessedMuslim.Models.Areas;
+@{
+    ViewData["Title"] = "Add Areas";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Add New Areas</h4>
+        <hr />
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Country</span>
+                    </div>
+                    @Html.DropDownListFor(model => model.CountryId, (IEnumerable<SelectListItem>)ViewBag.CountryId, "--- Select Country ---", new { @class = "form-control" })
+
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">State</span>
+                    </div>
+                    @Html.DropDownListFor(model => model.StateId, (IEnumerable<SelectListItem>)ViewBag.StateId, "--- Select State ---", new { @class = "form-control" })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">City</span>
+                    </div>
+                    @Html.DropDownListFor(model => model.CityId, (IEnumerable<SelectListItem>)ViewBag.CityId, "--- Select City ---", new { @class = "form-control" })
+
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Area Code</span>
+                    </div>
+                    @Html.EditorFor(model => model.AreaCode, new
+                    {
+                        htmlAttributes =
+                        new { @class = "form-control", required = "required" }
+                    })
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Area Name</span>
+                    </div>
+                    @Html.EditorFor(model => model.AreaName, new
+                    {
+                        htmlAttributes =
+                        new { @class = "form-control", required = "required" }
+                    })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-dark" />
+                </div>
+            </div>
+        </div>
+
+        @if (!String.IsNullOrEmpty(ViewBag.error))
+        {
+            <div class="mt-2">
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.error
+                </div>
+            </div>
+        }
+
+        @if (!String.IsNullOrEmpty(ViewBag.result))
+        {
+            <div class="mt-2">
+                <div class="alert alert-success" role="alert">
+                    @ViewBag.result
+                </div>
+            </div>
+        }
+
+    </div>
+}
+

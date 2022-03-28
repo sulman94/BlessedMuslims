@@ -1,0 +1,69 @@
+﻿@model List<BlessedMuslim.Models.Areas>;
+@{
+    ViewData["Title"] = "Areas";
+}
+
+<script>
+    $(document).ready(function () {
+        let userRole = "@String.Format(User.Claims.FirstOrDefault(x => x.Type.Contains("role")).Value)"
+        var table = $('#example').DataTable({
+            "ajax": "/Areas/getAreas",
+            "ordering": false,
+            "columns": [
+                { "data": "CountryName" },
+                { "data": "StateName"},
+                { "data": "CityName" },
+                { "data": "AreaName" },
+                { "data": "" },
+            ],
+            "columnDefs": [
+                {
+                    "data": null,
+                    "defaultContent": userRole == "Admin" ? "<button id='edit' class='btn btn-dark'>Edit</button><button id='delete' class='btn btn-dark'>Delete</button><button id='detailView' class='btn btn-dark'>View</button>" : "<button id='detailView' class='btn btn-dark'>View</button>",
+                    "targets": -1,
+                    "orderable": false,
+                }
+            ],
+            error: function (error) {
+            alert(error);
+        }
+        });
+
+        $('#example tbody').on( 'click', '#edit', function () {
+            var data = table.row( $(this).parents('tr') ).data();
+            var url = '@Url.Action("Edit", "Areas", new { id = "__id__" })';
+            window.location.href = url.replace('__id__', data.Id);
+        });
+
+        $('#example tbody').on( 'click', '#delete', function () {
+            var data = table.row( $(this).parents('tr') ).data();
+            var url = '@Url.Action("Delete", "Areas", new { id = "__id__" })';
+            if (confirm("Please confirm to delete this record")) {
+                window.location.href = url.replace('__id__', data.Id);
+            }
+        });
+        $('#example tbody').on('click', '#detailView', function () {
+            var data = table.row( $(this).parents('tr') ).data();
+            var url = '@Url.Action("Details", "Areas", new { id = "__id__" })';
+            window.location.href = url.replace('__id__', data.Id);
+        });
+    });
+</script>
+
+<div>
+    <div class="m-2 float-right">
+        <input type="button" class="btn btn-dark" value="Add New" onclick="location.href='@Url.Action("Add", "Areas")'" />
+    </div>
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Area</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+

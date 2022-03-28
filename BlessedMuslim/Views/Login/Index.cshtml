@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<!-- Main Content -->
+<div class="container-fluid">
+    <div class="row main-content bg-success text-center">
+        <div class="col-md-4 text-center company__info">
+            <span class="company__logo"><h2><span class="fa fa-android"></span></h2></span>
+            @*<h4 class="company_title">Raheel & Reyan Roadways Services</h4>*@
+            <img src="~/content/LoginView.png"/>
+        </div>
+        <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+            <div class="container-fluid">
+                <div class="row">
+                    <h2 class="m-auto">Log In</h2>
+                </div>
+                <div class="row">
+                    <form action="~/Login" method="post" class="form-group">
+                        <div class="row">
+                            <input type="text" name="email" id="email" class="form__input" placeholder="Username">
+                        </div>
+                        <div class="row">
+                            <!-- <span class="fa fa-lock"></span> -->
+                            <input type="password" name="password" id="password" class="form__input" placeholder="Password">
+                        </div>
+                        <div class="row">
+                            <input type="submit" value="Login" class="btn">
+                            <p class="col-form-label"><strong>Powered By: </strong> <a style="font-size: 16px;" href="http://quorumbinaries.com/" target="_blank">Quorum Binaries</a></p>
+                        </div>
+                    </form>
+                </div>
+                @if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+                {
+                    <div class="mt-2">
+                        <div class="alert alert-danger" role="alert">
+                            @ViewBag.ErrorMessage
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

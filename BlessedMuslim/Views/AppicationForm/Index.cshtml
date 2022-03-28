@@ -1,0 +1,90 @@
+﻿@model List<BlessedMuslim.Models.DsrApplicationForm>;
+@{
+    ViewData["Title"] = "Applications";
+}
+
+<script>
+    $(document).ready(function () {
+        let userRole = "@String.Format(User.Claims.FirstOrDefault(x => x.Type.Contains("role")).Value)"
+        var table = $('#example').DataTable({
+            "ajax": "/AppicationForm/getApplications",
+            "ordering": false,
+            "columns": [
+                 { "data": "SubmitDate" },
+                { "data": "Name" },
+                /*{ "data": "DOB"},*/
+                { "data": "ContactNumber" },
+                { "data": "Area" },
+                { "data": "Status" },
+                { "data": "" },
+            ],
+            "columnDefs": [
+                {
+                    "data": null,
+                    "defaultContent": userRole == "Admin" ? "<button id='Approve' class='btn btn-dark'>Approve</button><button id='Reject' class='btn btn-dark'>Reject</button><button id='edit' class='btn btn-dark'>Edit</button><button id='detailView' class='btn btn-dark'>View</button>" : "<button id='detailView' class='btn btn-dark'>View</button>",
+                    "targets": -1,
+                    "orderable": false,
+                }
+            ],
+            error: function (error) {
+            alert(error);
+        }
+        });
+
+        $('#example tbody').on( 'click', '#Approve', function () {
+            var data = table.row( $(this).parents('tr') ).data();
+            var url = '@Url.Action("Approve", "AppicationForm", new { id = "__id__" })';
+            window.location.href = url.replace('__id__', data.Id);
+            //if (confirm("Please confirm to delete this record")) {
+            //    window.location.href = url.replace('__id__', data.Id);
+            //}
+        });
+
+        $('#example tbody').on('click', '#Reject', function () {
+            var data = table.row( $(this).parents('tr') ).data();
+            var url = '@Url.Action("Reject", "AppicationForm", new { id = "__id__" })';
+            window.location.href = url.replace('__id__', data.Id);
+            //if (confirm("Please confirm to delete this record")) {
+            //    window.location.href = url.replace('__id__', data.Id);
+            //}
+        });
+
+        $('#example tbody').on( 'click', '#edit', function () {
+            var data = table.row( $(this).parents('tr') ).data();
+            var url = '@Url.Action("Edit", "AppicationForm", new { id = "__id__" })';
+            window.location.href = url.replace('__id__', data.Id);
+        });
+
+        @*$('#example tbody').on( 'click', '#delete', function () {
+            var data = table.row( $(this).parents('tr') ).data();
+            var url = '@Url.Action("Delete", "AppicationForm", new { id = "__id__" })';
+            if (confirm("Please confirm to delete this record")) {
+                window.location.href = url.replace('__id__', data.Id);
+            }
+        });*@
+        $('#example tbody').on('click', '#detailView', function () {
+            var data = table.row( $(this).parents('tr') ).data();
+            var url = '@Url.Action("Details", "AppicationForm", new { id = "__id__" })';
+            window.location.href = url.replace('__id__', data.Id);
+        });
+    });
+</script>
+
+<div>
+    @*<div class="m-2 float-right">
+        <input type="button" class="btn btn-dark" value="Add New" onclick="location.href='@Url.Action("Add", "AppicationForm")'" />
+    </div>*@
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Submit Date</th>
+                <th>Name</th>
+                @*<th>DOB</th>*@
+                <th>Contact Number</th>
+                <th>Area</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    </table>
+</div>
