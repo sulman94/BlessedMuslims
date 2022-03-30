@@ -414,6 +414,7 @@ namespace BlessedMuslim.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.LastLoginDate).HasColumnType("datetime");
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.RoleId)

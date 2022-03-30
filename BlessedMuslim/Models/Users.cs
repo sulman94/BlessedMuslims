@@ -19,7 +19,7 @@ namespace BlessedMuslim.Models
         public DateTime CreatedDate { get; set; }
         public bool IsDeleted { get; set; }
         public int? RoleId { get; set; }
-
+        public DateTime? LastLoginDate { get; set; }
         public virtual Role Role { get; set; }
         public virtual ICollection<Employee> Employee { get; set; }
         public virtual ICollection<Retailers> Retailers { get; set; }
