@@ -25,17 +25,4 @@ namespace BlessedMuslim.Models
         public long? ModifiedBy { get; set; }
         public bool? IsUserCreated { get; set; }
     }
-    public partial class DsrApplicationFormView
-    {
-        public long Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Dob { get; set; }
-        public string AddressLine1 { get; set; }
-        public string AddressLine2 { get; set; }
-        public string PostCode { get; set; }
-        public string ContactNumber { get; set; }
-        public string AreaName { get; set; }
-        public string SubmitDate { get; set; }
-    }
 }

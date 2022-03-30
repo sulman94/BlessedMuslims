@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+    ViewData["Title"] = "Appication Form";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <br />
+        <div class="row">
+
+            @if (!string.IsNullOrEmpty(ViewBag.error))
+            {
+                <div class="col-12">
+                    <div class="jumbotron text-center" style="background-color:white;">
+                        <h1 class="display-3">Oops, Something went wrong</h1>
+                        <i class="fa fa-times" id="checkmark" style="font-size: 60px !important; color: red; "></i>
+                        <h5>@ViewBag.error</h5>
+                        <hr>
+                        <p class="lead">
+                            <a class="btn btn-dark" asp-action="apply">Continue to homepage</a>
+                        </p>
+                    </div>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(ViewBag.result))
+            {
+                <div class="col-12">
+                    <div class="jumbotron text-center" style="background-color:white;">
+                        <h1 class="display-3">Thank You!</h1>
+                        <i class="fa fa-check-circle" id="checkmark" style="font-size: 60px !important; color: green; "></i>
+                        <h3>@ViewBag.result</h3>
+                        <p class="lead"><strong>@ViewBag.ThankyouMsg</strong></p>
+                        <hr>
+                        <p class="lead">
+                            <a class="btn btn-dark" asp-action="apply">Continue to homepage</a>
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+

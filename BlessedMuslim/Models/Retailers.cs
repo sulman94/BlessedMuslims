@@ -24,6 +24,8 @@ namespace BlessedMuslim.Models
         public int? CreatedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public int? ModifiedBy { get; set; }
+        public bool TermsAgreement { get; set; }
+        public string ReferenceCode { get; set; }
 
         public virtual Cities CityCodeNavigation { get; set; }
         public virtual Users RegByNavigation { get; set; }

@@ -31,6 +31,7 @@ namespace BlessedMuslim.Models
         public int? CreatedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public int? ModifiedBy { get; set; }
+        public string ReferenceCode { get; set; }
 
         public virtual Areas Area { get; set; }
         public virtual Users User { get; set; }

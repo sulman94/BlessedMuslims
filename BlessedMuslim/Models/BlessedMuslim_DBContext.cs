@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
@@ -36,9 +34,9 @@ namespace BlessedMuslim.Models
             if (!optionsBuilder.IsConfigured)
             {
                 IConfigurationRoot configuration = new ConfigurationBuilder()
-                //.SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
-                .AddJsonFile("appsettings.json")
-                .Build();
+                                //.SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
+                                .AddJsonFile("appsettings.json")
+                                .Build();
                 optionsBuilder.UseSqlServer(configuration.GetConnectionString("MBDbConstr"));
             }
         }
@@ -229,7 +227,6 @@ namespace BlessedMuslim.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.SubmitDate).HasColumnType("datetime");
-                entity.Property(e => e.IsUserCreated).HasColumnType("boolean");
             });
 
             modelBuilder.Entity<Employee>(entity =>
@@ -296,6 +293,10 @@ namespace BlessedMuslim.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
+                entity.Property(e => e.ReferenceCode)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.RepId)
                     .HasColumnName("RepID")
                     .HasMaxLength(10)
@@ -354,6 +355,10 @@ namespace BlessedMuslim.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
+                entity.Property(e => e.ReferenceCode)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.RegDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ShopPhone)
@@ -400,6 +405,8 @@ namespace BlessedMuslim.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.LastLoginDate).HasColumnType("datetime");
+
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -414,7 +421,6 @@ namespace BlessedMuslim.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.LastLoginDate).HasColumnType("datetime");
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.RoleId)
