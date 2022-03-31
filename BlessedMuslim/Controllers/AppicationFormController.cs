@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace BlessedMuslim.Controllers
 {
+    [Authorize(Roles = "Admin,Manager")]
     public class AppicationFormController : Controller
     {
         private readonly BlessedMuslim_DBContext context = new BlessedMuslim_DBContext();
@@ -70,7 +71,6 @@ namespace BlessedMuslim.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> getApplications()
         {
             var dataApplications = await (from a in context.DsrApplicationForm
@@ -90,7 +90,6 @@ namespace BlessedMuslim.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Approve(int id)
         {
             try
@@ -115,7 +114,6 @@ namespace BlessedMuslim.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Reject(int id)
         {
             try
@@ -138,7 +136,6 @@ namespace BlessedMuslim.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles = "Admin,Manager")]
         public async Task<ActionResult> Details(int Id)
         {
             var dataApplications = await (from a in context.DsrApplicationForm
