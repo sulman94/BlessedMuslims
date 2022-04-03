@@ -47,6 +47,7 @@ namespace BlessedMuslim.Controllers
             int _min = 1000;
             int _max = 9999;
             Random rdm = new Random();
+            ViewBag.ManagerId = new SelectList(await context.Users.Include(x=>x.Role).Where(x=>x.Role.RoleName == "Manager").Select(x => new { x.Id, ManagerName = x.Name }).ToListAsync(), "Id", "ManagerName");
             ViewBag.RoleId = new SelectList(await context.Role.Select(x => new { x.Id, RoleName = x.RoleName }).ToListAsync(), "Id", "RoleName");
             ViewBag.SalesRep = new SelectList(await context.DsrApplicationForm.Where(a => a.ApprovedDate != null && a.RejectedDate == null && a.IsUserCreated != true).Select(x => new { x.Id, salesRepName = x.FirstName +""+ x.LastName + rdm.Next(_min, _max) }).ToListAsync(), "Id", "salesRepName");
             return View(new Users());
@@ -82,6 +83,7 @@ namespace BlessedMuslim.Controllers
             int _min = 1000;
             int _max = 9999;
             Random rdm = new Random();
+            ViewBag.ManagerId = new SelectList(await context.Users.Include(x => x.Role).Where(x => x.Role.RoleName == "Manager").Select(x => new { x.Id, ManagerName = x.Name }).ToListAsync(), "Id", "ManagerName");
             ViewBag.RoleId = new SelectList(await context.Role.Select(x => new { x.Id, RoleName = x.RoleName }).ToListAsync(), "Id", "RoleName");
             ViewBag.SalesRep = new SelectList(await context.DsrApplicationForm.Where(a => a.ApprovedDate != null && a.RejectedDate == null && a.IsUserCreated != true).Select(x => new { x.Id, salesRepName = x.FirstName + "" + x.LastName + rdm.Next(_min, _max) }).ToListAsync(), "Id", "salesRepName");
             var std = await context.Users.Where(s => s.Id == Id).FirstOrDefaultAsync();
@@ -99,6 +101,7 @@ namespace BlessedMuslim.Controllers
                 dbEntry.Property("Password").IsModified = true;
                 dbEntry.Property("Phone").IsModified = true;
                 dbEntry.Property("RoleId").IsModified = true;
+                dbEntry.Property("ReportTo").IsModified = true;
                 await context.SaveChangesAsync();
                 ViewBag.result = "Record Updated Successfully!";
             }
@@ -116,6 +119,7 @@ namespace BlessedMuslim.Controllers
             Random rdm = new Random();
             int _min = 1000;
             int _max = 9999;
+            ViewBag.ManagerId = new SelectList(await context.Users.Include(x => x.Role).Where(x => x.Role.RoleName == "Manager").Select(x => new { x.Id, ManagerName = x.Name }).ToListAsync(), "Id", "ManagerName");
             ViewBag.RoleId = new SelectList(await context.Role.Select(x => new { x.Id, RoleName = x.RoleName }).ToListAsync(), "Id", "RoleName");
             ViewBag.SalesRep = new SelectList(await context.DsrApplicationForm.Where(a => a.ApprovedDate != null && a.RejectedDate == null && a.IsUserCreated != true).Select(x => new { x.Id, salesRepName = x.FirstName + "" + x.LastName + rdm.Next(_min, _max) }).ToListAsync(), "Id", "salesRepName");
             var std = await context.Users.Where(s => s.Id == Id).FirstOrDefaultAsync();

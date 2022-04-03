@@ -34,7 +34,6 @@ namespace BlessedMuslim.Models
         public string AccountNo { get; set; }
         public string SortCode { get; set; }
         public string RepId { get; set; }
-        public long? ManagerId { get; set; }
         public bool? IsActive { get; set; }
         public string ReferenceCode { get; set; }
         public int? UserId { get; set; }

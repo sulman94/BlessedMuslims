@@ -20,6 +20,7 @@ namespace BlessedMuslim.Models
         public bool IsDeleted { get; set; }
         public int? RoleId { get; set; }
         public DateTime? LastLoginDate { get; set; }
+        public int? ReportTo { get; set; }
 
         public virtual Role Role { get; set; }
         public virtual ICollection<DsrApplicationForm> DsrApplicationForm { get; set; }

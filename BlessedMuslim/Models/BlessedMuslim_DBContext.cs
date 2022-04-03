@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace BlessedMuslim.Models
@@ -22,12 +21,12 @@ namespace BlessedMuslim.Models
         public virtual DbSet<Config> Config { get; set; }
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<DsrApplicationForm> DsrApplicationForm { get; set; }
+        public virtual DbSet<HubAreas> HubAreas { get; set; }
+        public virtual DbSet<HubMaster> HubMaster { get; set; }
         public virtual DbSet<Retailers> Retailers { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<States> States { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<HubMaster> HubMaster { get; set; }
-        public virtual DbSet<HubAreas> HubAreas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -230,8 +229,6 @@ namespace BlessedMuslim.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ManagerId).HasColumnName("ManagerID");
-
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Phone1)
@@ -280,6 +277,27 @@ namespace BlessedMuslim.Models
                     .WithMany(p => p.DsrApplicationForm)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_ApplicationForm_Users");
+            });
+
+            modelBuilder.Entity<HubAreas>(entity =>
+            {
+                entity.Property(e => e.HubId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<HubMaster>(entity =>
+            {
+                entity.Property(e => e.HubDesc)
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.HubId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Retailers>(entity =>
@@ -359,32 +377,6 @@ namespace BlessedMuslim.Models
                     .WithMany(p => p.States)
                     .HasForeignKey(d => d.CountryId)
                     .HasConstraintName("FK_States_Country");
-            });
-
-
-            modelBuilder.Entity<HubMaster>(entity =>
-            {
-                entity.Property(e => e.HubId)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.HubDesc)
-                    .IsRequired()
-                    .HasMaxLength(150)
-                    .IsUnicode(false);
-            });
-                
-            modelBuilder.Entity<HubAreas>(entity =>
-            {
-                entity.Property(e => e.HubId)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.AreaId)
-                    .IsRequired()
-                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Users>(entity =>

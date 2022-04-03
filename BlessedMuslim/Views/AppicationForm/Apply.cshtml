@@ -49,6 +49,19 @@
 
                 </div>
             </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Last Name</span>
+                    </div>
+
+                    @Html.DropDownListFor(model => model.AreaId, new List<SelectListItem>{
+        new SelectListItem{ Text="Male", Value="Male"},
+        new SelectListItem{ Text="Female", Value="Female"}
+        }, "--- Select Gender ---", new { @class = "form-control", required = "required" })
+
+                </div>
+            </div>
 
             <div class="col-12 col-md-6">
                 <div class="input-group input-group-sm mb-3">
@@ -76,7 +89,19 @@
 
                 </div>
             </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Email</span>
+                    </div>
+                    @Html.EditorFor(model => model.Email, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required" }
+               })
 
+                </div>
+            </div>
             <div class="col-12 col-md-12">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
@@ -127,6 +152,8 @@
 
                 </div>
             </div>
+
+
             <div class="col-12 col-md-5">
                 <div class="input-group input-group-sm mb-3">
                     @*<div class="input-group-prepend">
