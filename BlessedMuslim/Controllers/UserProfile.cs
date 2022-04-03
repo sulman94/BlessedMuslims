@@ -66,6 +66,7 @@ namespace BlessedMuslim.Controllers
                     SaleRep.IsUserCreated = true;
                     context.Update(SaleRep);
                 }
+
                 await context.SaveChangesAsync();
                 ViewBag.result = "Record Saved Successfully!";
             }
