@@ -158,5 +158,31 @@ namespace BlessedMuslim.Controllers
             return View(dataApplications[0]);
         }
 
+        public async Task<IActionResult> Edit(int Id)
+        {
+            ViewBag.AreaId = new SelectList(await context.Areas.Where(x => x.IsActive == true).Select(x => new { x.Id, AreaName = x.AreaName }).ToListAsync(), "Id", "AreaName");
+            var std = await context.DsrApplicationForm.Where(s => s.Id == Id).FirstOrDefaultAsync();
+            return View(std);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(DsrApplicationForm data)
+        {
+            try
+            {
+                //var dbEntry = context.Entry(data);
+                //dbEntry.Property("CountryCode").IsModified = true;
+                //dbEntry.Property("CountryName").IsModified = true;
+
+                await context.SaveChangesAsync();
+                ViewBag.result = "Record Updated Successfully!";
+            }
+            catch (Exception e)
+            {
+                var error = e;
+                ViewBag.error = e.Message;
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
