@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BlessedMuslim.Controllers
 {
+    [Authorize(Roles = "Admin,Manager")]
     public class RetailersController : Controller
     {
         private readonly BlessedMuslim_DBContext context = new BlessedMuslim_DBContext();
@@ -37,6 +38,7 @@ namespace BlessedMuslim.Controllers
 
         // POST: AppicationFormController/Save
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(Retailers data)
         {

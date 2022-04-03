@@ -7,7 +7,7 @@ namespace BlessedMuslim.Models
     {
         public Users()
         {
-            Employee = new HashSet<Employee>();
+            DsrApplicationForm = new HashSet<DsrApplicationForm>();
             Retailers = new HashSet<Retailers>();
         }
 
@@ -22,7 +22,7 @@ namespace BlessedMuslim.Models
         public DateTime? LastLoginDate { get; set; }
 
         public virtual Role Role { get; set; }
-        public virtual ICollection<Employee> Employee { get; set; }
+        public virtual ICollection<DsrApplicationForm> DsrApplicationForm { get; set; }
         public virtual ICollection<Retailers> Retailers { get; set; }
     }
 }

@@ -1,6 +1,5 @@
-﻿using System;
+﻿
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 
 namespace BlessedMuslim.Models
@@ -23,7 +22,6 @@ namespace BlessedMuslim.Models
         public virtual DbSet<Config> Config { get; set; }
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<DsrApplicationForm> DsrApplicationForm { get; set; }
-        public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<Retailers> Retailers { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<States> States { get; set; }
@@ -184,6 +182,10 @@ namespace BlessedMuslim.Models
             {
                 entity.ToTable("DSR.ApplicationForm");
 
+                entity.Property(e => e.AccountNo)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.AddressLine1)
                     .HasMaxLength(256)
                     .IsUnicode(false);
@@ -199,64 +201,19 @@ namespace BlessedMuslim.Models
                     .HasMaxLength(25)
                     .IsUnicode(false);
 
+                entity.Property(e => e.DateOfJoining).HasColumnType("datetime");
+
                 entity.Property(e => e.Dob)
                     .HasColumnName("DOB")
                     .HasColumnType("datetime");
-
-                entity.Property(e => e.FirstName)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.LastName)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.PostCode)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.RejectedBy).HasColumnType("datetime");
-
-                entity.Property(e => e.RejectedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.Remarks)
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.SubmitDate).HasColumnType("datetime");
-            });
-
-            modelBuilder.Entity<Employee>(entity =>
-            {
-                entity.Property(e => e.AccountNo)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.AddressLine1)
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.AddressLine2)
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.DateOfJoining).HasColumnType("datetime");
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.FirstName)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.FullName)
-                    .HasMaxLength(200)
+                    .IsRequired()
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Gender)
@@ -268,14 +225,10 @@ namespace BlessedMuslim.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.LastName)
-                    .HasMaxLength(200)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ManagerId).HasColumnName("ManagerID");
-
-                entity.Property(e => e.MiddleName)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
 
@@ -297,6 +250,14 @@ namespace BlessedMuslim.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
+                entity.Property(e => e.RejectedBy).HasColumnType("datetime");
+
+                entity.Property(e => e.RejectedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Remarks)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.RepId)
                     .HasColumnName("RepID")
                     .HasMaxLength(10)
@@ -306,15 +267,17 @@ namespace BlessedMuslim.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.SubmitDate).HasColumnType("datetime");
+
                 entity.HasOne(d => d.Area)
-                    .WithMany(p => p.Employee)
+                    .WithMany(p => p.DsrApplicationForm)
                     .HasForeignKey(d => d.AreaId)
-                    .HasConstraintName("FK_Employee_Areas");
+                    .HasConstraintName("FK_ApplicationForm_Areas");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.Employee)
+                    .WithMany(p => p.DsrApplicationForm)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_Employee_Users");
+                    .HasConstraintName("FK_ApplicationForm_Users");
             });
 
             modelBuilder.Entity<Retailers>(entity =>

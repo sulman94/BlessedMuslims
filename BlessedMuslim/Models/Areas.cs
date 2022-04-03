@@ -7,7 +7,7 @@ namespace BlessedMuslim.Models
     {
         public Areas()
         {
-            Employee = new HashSet<Employee>();
+            DsrApplicationForm = new HashSet<DsrApplicationForm>();
         }
 
         public int Id { get; set; }
@@ -21,6 +21,6 @@ namespace BlessedMuslim.Models
         public virtual Cities City { get; set; }
         public virtual Country Country { get; set; }
         public virtual States State { get; set; }
-        public virtual ICollection<Employee> Employee { get; set; }
+        public virtual ICollection<DsrApplicationForm> DsrApplicationForm { get; set; }
     }
 }

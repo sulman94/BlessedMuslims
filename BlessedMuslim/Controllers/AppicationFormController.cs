@@ -35,6 +35,7 @@ namespace BlessedMuslim.Controllers
 
         // POST: AppicationFormController/Save
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Apply(DsrApplicationForm data)
         {
