@@ -1,0 +1,51 @@
+﻿@model List<BlessedMuslim.Models.HubMaster>;
+@{
+    ViewData["Title"] = "Hub Master";
+}
+
+<script>
+    $(document).ready(function () {
+        let userRole = "@String.Format(User.Claims.FirstOrDefault(x => x.Type.Contains("role")).Value)"
+        var table = $('#example').DataTable({
+            "ajax": "/HubArea/getHubs",
+            "ordering": false,
+            "columns": [
+                { "data": "HubId" },
+                { "data": "HubDesc" },
+                { "data": "" },
+            ],
+            "columnDefs": [
+                {
+                    "data": null,
+                    "defaultContent": userRole == "Admin" ? "<button id='Edit' class='btn btn-dark'>View</button>" : "<button id='Edit' class='btn btn-dark'>Edit</button>",
+                    "targets": -1,
+                    "orderable": false,
+                }
+            ],
+            error: function (error) {
+            alert(error);
+        }
+        });
+
+        $('#example tbody').on('click', '#Edit', function () {
+            var data = table.row( $(this).parents('tr') ).data();
+            var url = '@Url.Action("Edit", "HubArea", new { id = "__id__" })';
+            window.location.href = url.replace('__id__', data.Id);
+        });
+    });
+</script>
+
+<div>
+    <div class="m-2 float-right">
+        <a class="btn btn-dark" asp-controller="HubArea" asp-action="Add">Add New</a>
+    </div>
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Hub Name</th>
+                <th>Hub Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    </table>
+</div>

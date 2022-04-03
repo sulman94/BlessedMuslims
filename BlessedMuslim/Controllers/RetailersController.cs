@@ -68,6 +68,57 @@ namespace BlessedMuslim.Controllers
             //return RedirectToAction("Apply");
 
         }
+        public IActionResult Index()
+        {
+            return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> getRetailers()
+        {
+            var dataApplications = await (from rt in context.Retailers
+                                          join bc in context.BusinessCategories on rt.BusinessCategoryId equals bc.Id
+                                          join c in context.Cities on rt.CityCode equals c.Id
+                                          select new
+                                          {
+
+                                              Id = rt.Id,
+                                              BusinessName = rt.BusinessName,
+                                              BusinessCatName = bc.Sdesc,
+                                              City = c.CityName,
+                                              Address = rt.AddressLine1 +" "+ rt.AddressLine2,
+                                              PostCode = rt.PostCode,
+                                              Email = rt.Email,
+                                              ContactPerson = rt.ContactPerson,
+                                              ContactNumber = "Shop:" + rt.ShopPhone + " / Mobile :" + rt.MobileNumber,
+                                              RefCode = rt.ReferenceCode,
+                                              CreatedDate = rt.CreatedDate == null ? "N/A" : Convert.ToDateTime(rt.CreatedDate).ToString("yyyy-MM-dd")
+                                          }).ToListAsync();
+            dataApplications = dataApplications.OrderByDescending(x => x.CreatedDate).ToList();
+            return Json(new { data = dataApplications }, new Newtonsoft.Json.JsonSerializerSettings());
+        }
+        public async Task<ActionResult> Details(int Id)
+        {
+            var dataApplications = await (from rt in context.Retailers
+                                          join bc in context.BusinessCategories on rt.BusinessCategoryId equals bc.Id
+                                          join c in context.Cities on rt.CityCode equals c.Id
+                                          select new RetailersView
+                                          {
+                                              Id = rt.Id,
+                                              BusinessName = rt.BusinessName,
+                                              BusinessCatName = bc.Sdesc,
+                                              City = c.CityName,
+                                              AddressLine1 = rt.AddressLine1,
+                                              AddressLine2 = rt.AddressLine2,
+                                              PostCode = rt.PostCode,
+                                              Email = rt.Email,
+                                              ContactPerson = rt.ContactPerson,
+                                              ShopPhone = rt.ShopPhone,
+                                              MobileNumber = rt.MobileNumber,
+                                              RefCode = rt.ReferenceCode,
+                                              CreatedDate = rt.CreatedDate == null ? "N/A" : Convert.ToDateTime(rt.CreatedDate).ToString("yyyy-MM-dd")
+                                          }).ToListAsync();
+            return View(dataApplications[0]);
+        }
 
         //// GET: Retailers
         //public async Task<IActionResult> Index()

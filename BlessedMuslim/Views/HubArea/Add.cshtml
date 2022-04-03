@@ -1,0 +1,135 @@
+﻿@using (Html.BeginForm("CreateHubAreas", "HubArea", FormMethod.Post, new { id = "HubAreaCreation" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Hub Areas</h4>
+        <hr />
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Hub Name</span>
+                    </div>
+                    @Html.Editor("HubName", new
+                           {
+                               htmlAttributes =
+                                new { @class = "form-control", required = "required" }
+                           })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Hub Description</span>
+                    </div>
+                    @Html.Editor("HubDescription", new
+                          {
+                              htmlAttributes =
+                               new { @class = "form-control", required = "required" }
+                          })
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-5">
+                <div class="input-group input-group-sm mb-3">
+                    @Html.DropDownList("AvailableAreas", (IEnumerable<SelectListItem>)ViewBag.AreaId, new { @class = "form-control", multiple = "multiple", style = "height:500px;" })
+                </div>
+            </div>
+            <div class="col-12 col-md-1">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="button" class="btn btn-dark" id="right" value=">" style="width: 50px; font-weight:bolder;" /><br />
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" class="btn btn-dark" id="left" value="<" style="width: 50px; font-weight:bolder;" /><br />
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" class="btn btn-dark" id="rightall" value=">>" style="width: 50px; font-weight:bolder;" />
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" class="btn btn-dark" id="leftall" value="<<" style="width: 50px; font-weight:bolder;" /><br />
+
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-2">
+                    <select class="form-control" id="SelectedAreas" name="SelectedAreas" multiple="multiple" style="height:500px;">
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="form-group float-left">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="button" id="submitBtn" class="btn btn-dark">Save</button>
+                    
+                </div>
+            </div>
+            <div class="form-group float-left">
+                <div class="col-md-offset-2 col-md-10">
+                    <a asp-action="Index" class="btn btn-dark">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+<script>
+    $(document).ready(function () {
+
+        $("#submitBtn").click(function () {
+            $("#SelectedAreas option").prop('selected', true);
+            $("#HubAreaCreation").submit();
+        });
+
+        $(function () {
+            function moveItems(origin, dest) {
+                $(origin).find(':selected').appendTo(dest);
+                $("#SelectedAreas option").prop('selected', false);
+                $("#AvailableAreas option").prop('selected', false);
+            }
+
+            function moveAllItems(origin, dest) {
+                $(origin).children().appendTo(dest);
+                $("#SelectedAreas option").prop('selected', false);
+                $("#AvailableAreas option").prop('selected', false);
+            }
+            $('#left').click(function () {
+                moveItems('#SelectedAreas', '#AvailableAreas');
+            });
+
+            $('#right').on('click', function () {
+                moveItems('#AvailableAreas', '#SelectedAreas');
+            });
+
+            $('#leftall').on('click', function () {
+                moveAllItems('#SelectedAreas', '#AvailableAreas');
+            });
+
+            $('#rightall').on('click', function () {
+                moveAllItems('#AvailableAreas', '#SelectedAreas');
+            });
+        });
+    });
+
+</script>

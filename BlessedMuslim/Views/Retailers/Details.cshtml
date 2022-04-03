@@ -1,127 +1,179 @@
-﻿@model BlessedMuslim.Models.Retailers
-
+﻿@model BlessedMuslim.Models.RetailersView;
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_LayoutRetailers.cshtml";
 }
 
-<h1>Details</h1>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Retailers</h4>
+        <hr />
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Business Name</span>
+                    </div>
+                    @Html.EditorFor(model => model.BusinessName, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
 
-<div>
-    <h4>Retailers</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BusinessName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BusinessName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BusinessCategoryId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BusinessCategoryId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AddressLine1)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AddressLine1)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AddressLine2)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AddressLine2)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PostCode)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PostCode)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ContactPerson)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ContactPerson)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ShopPhone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ShopPhone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MobileNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MobileNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RegDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RegDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Comments)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Comments)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ModifiedDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ModifiedBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ModifiedBy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CityCodeNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CityCodeNavigation.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RegByNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RegByNavigation.Email)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Business Category Name</span>
+                    </div>
+                    @Html.EditorFor(model => model.BusinessCatName, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
+
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">City</span>
+                    </div>
+                    @Html.EditorFor(model => model.City, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Post Code</span>
+                    </div>
+                    @Html.EditorFor(model => model.PostCode, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
+
+                </div>
+            </div>
+
+            <div class="col-12 col-md-12">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Address Line 1</span>
+                    </div>
+                    @Html.EditorFor(model => model.AddressLine1, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-12">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Address Line 2</span>
+                    </div>
+                    @Html.EditorFor(model => model.AddressLine2, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
+
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Email</span>
+                    </div>
+                    @Html.EditorFor(model => model.Email, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Contact Person</span>
+                    </div>
+                    @Html.EditorFor(model => model.ContactPerson, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Shop Phone</span>
+                    </div>
+                    @Html.EditorFor(model => model.ShopPhone, new
+                       {
+                           htmlAttributes =
+                            new { @class = "form-control", required = "required", @disabled = "disabled" }
+                       })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">MobileNumber</span>
+                    </div>
+                    @Html.EditorFor(model => model.MobileNumber, new
+                       {
+                           htmlAttributes =
+                            new { @class = "form-control", required = "required", @disabled = "disabled" }
+                       })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Reference Code</span>
+                    </div>
+                    @Html.EditorFor(model => model.RefCode, new
+                       {
+                           htmlAttributes =
+                            new { @class = "form-control", required = "required", @disabled = "disabled" }
+                       })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Created Date</span>
+                    </div>
+                    @Html.EditorFor(model => model.RefCode, new
+                       {
+                           htmlAttributes =
+                            new { @class = "form-control", required = "required", @disabled = "disabled" }
+                       })
+
+                </div>
+            </div>
+        </div>
+
+
+        <a asp-action="Index">Back to List</a>
+
+    </div>
+}

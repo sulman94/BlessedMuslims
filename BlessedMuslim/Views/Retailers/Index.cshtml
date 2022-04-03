@@ -1,138 +1,64 @@
-﻿@model IEnumerable<BlessedMuslim.Models.Retailers>
-
+﻿@model List<BlessedMuslim.Models.Retailers>;
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_LayoutRetailers.cshtml";
+    ViewData["Title"] = "Applications";
 }
 
-<h1>Index</h1>
+<script>
+    $(document).ready(function () {
+        let userRole = "@String.Format(User.Claims.FirstOrDefault(x => x.Type.Contains("role")).Value)"
+        var table = $('#example').DataTable({
+            "ajax": "/Retailers/getRetailers",
+            "ordering": false,
+            "columns": [
+                { "data": "BusinessName" },
+                { "data": "BusinessCatName" },
+                { "data": "City"},
+                { "data": "Address" },
+                { "data": "PostCode" },
+                { "data": "Email" },
+                { "data": "ContactPerson" },
+                { "data": "ContactNumber" },
+                { "data": "RefCode" },
+                { "data": "CreatedDate" },
+                { "data": "" },
+            ],
+            "columnDefs": [
+                {
+                    "data": null,
+                    "defaultContent": userRole == "Admin" ? "<button id='detailView' class='btn btn-dark'>View</button>" : "<button id='detailView' class='btn btn-dark'>View</button>",
+                    "targets": -1,
+                    "orderable": false,
+                }
+            ],
+            error: function (error) {
+            alert(error);
+        }
+        });
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BusinessName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BusinessCategoryId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AddressLine1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AddressLine2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PostCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactPerson)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShopPhone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MobileNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RegDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Comments)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CityCodeNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RegByNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BusinessName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BusinessCategoryId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AddressLine1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AddressLine2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PostCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactPerson)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShopPhone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MobileNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comments)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CityCodeNavigation.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegByNavigation.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        $('#example tbody').on('click', '#detailView', function () {
+            var data = table.row( $(this).parents('tr') ).data();
+            var url = '@Url.Action("Details", "Retailers", new { id = "__id__" })';
+            window.location.href = url.replace('__id__', data.Id);
+        });
+    });
+</script>
+
+<div>
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Business Name</th>
+                <th>Business Category</th>
+                <th>City</th>
+                <th>Address</th>
+                <th>Post Code</th>
+                <th>Email</th>
+                <th>Contact Person</th>
+                <th>Contact Number</th>
+                <th>Reference Code</th>
+                <th>Created Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    </table>
+</div>

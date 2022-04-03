@@ -26,6 +26,8 @@ namespace BlessedMuslim.Models
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<States> States { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<HubMaster> HubMaster { get; set; }
+        public virtual DbSet<HubAreas> HubAreas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -357,6 +359,32 @@ namespace BlessedMuslim.Models
                     .WithMany(p => p.States)
                     .HasForeignKey(d => d.CountryId)
                     .HasConstraintName("FK_States_Country");
+            });
+
+
+            modelBuilder.Entity<HubMaster>(entity =>
+            {
+                entity.Property(e => e.HubId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.HubDesc)
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+            });
+                
+            modelBuilder.Entity<HubAreas>(entity =>
+            {
+                entity.Property(e => e.HubId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AreaId)
+                    .IsRequired()
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Users>(entity =>
