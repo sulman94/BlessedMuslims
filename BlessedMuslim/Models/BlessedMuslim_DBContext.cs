@@ -388,6 +388,10 @@ namespace BlessedMuslim.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.HubId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.LastLoginDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Name)

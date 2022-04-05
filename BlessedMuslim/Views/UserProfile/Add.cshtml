@@ -94,7 +94,16 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text width-100" id="inputGroup-sizing-sm">Report To</span>
                     </div>
-                    @Html.DropDownListFor(model => model.ReportTo, (IEnumerable<SelectListItem>)ViewBag.ManagerId, "--- Select Manager ---", new { @class = "form-control", required = "required" })
+                    @Html.DropDownListFor(model => model.ReportTo, (IEnumerable<SelectListItem>)ViewBag.ManagerId, "--- Select Manager ---", new { @class = "form-control" })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Areas</span>
+                    </div>
+                    @Html.DropDownListFor(model => model.HubId, (IEnumerable<SelectListItem>)ViewBag.HubId, "--- Select Hub Area ---", new { @class = "form-control", required = "required" })
 
                 </div>
             </div>
@@ -144,6 +153,15 @@
                 $("[id=Id]").prop('disabled', true);
                 $("[id=Name]").val("");
                 $("#Id").val($("#target option:first").val());
+            }
+            if ($(this).is(":checked") && $('#HubId').is(':enabled')) {
+
+                $("[id=HubId]").prop('disabled', true);
+                $("#HubId").val($("#target option:first").val());
+            }
+            else {
+                $("[id=HubId]").prop('disabled', false);
+                $("#HubId").val($("#target option:first").val());
             }
         });
 
