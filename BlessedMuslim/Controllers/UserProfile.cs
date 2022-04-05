@@ -126,6 +126,7 @@ namespace BlessedMuslim.Controllers
             ViewBag.ManagerId = new SelectList(await context.Users.Include(x => x.Role).Where(x => x.Role.RoleName == "Manager").Select(x => new { x.Id, ManagerName = x.Name }).ToListAsync(), "Id", "ManagerName");
             ViewBag.RoleId = new SelectList(await context.Role.Select(x => new { x.Id, RoleName = x.RoleName }).ToListAsync(), "Id", "RoleName");
             ViewBag.SalesRep = new SelectList(await context.DsrApplicationForm.Where(a => a.ApprovedDate != null && a.RejectedDate == null && a.IsUserCreated != true).Select(x => new { x.Id, salesRepName = x.FirstName + "" + x.LastName + rdm.Next(_min, _max) }).ToListAsync(), "Id", "salesRepName");
+            ViewBag.HubId = new SelectList(await context.HubAreas.Select(x => new { x.HubId, HubName = x.HubId }).Distinct().ToListAsync(), "HubId", "HubName");
             var std = await context.Users.Where(s => s.Id == Id).FirstOrDefaultAsync();
             return View(std);
         }
