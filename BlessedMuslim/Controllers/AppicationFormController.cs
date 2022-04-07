@@ -74,20 +74,50 @@ namespace BlessedMuslim.Controllers
         [HttpGet]
         public async Task<IActionResult> getApplications()
         {
-            var dataApplications = await (from a in context.DsrApplicationForm
-                                          join ci in context.Areas on a.AreaId equals ci.Id
-                                          select new
-                                          {
-                                              Id = a.Id,
-                                              Name = a.FirstName + " " + a.LastName,
-                                              DOB = a.Dob,
-                                              ContactNumber = a.ContactNumber,
-                                              SubmitDate = a.SubmitDate == null ? "N/A" : Convert.ToDateTime(a.SubmitDate).ToString("yyyy-MM-dd"),
-                                              Area = ci.AreaCode + " - " + ci.AreaName,
-                                              Status = a.RejectedDate != null ? "Rejected" : a.ApprovedDate != null ? "Approved" : "Submitted"
-                                          }).ToListAsync();
-            dataApplications = dataApplications.OrderByDescending(x => x.SubmitDate).ToList();
-            return Json(new { data = dataApplications }, new Newtonsoft.Json.JsonSerializerSettings());
+            var isManager = HttpContext.User.IsInRole("Manager");
+            long userId;
+            if (isManager)
+            {
+                userId = Convert.ToInt64(HttpContext.User.Identity.Name);
+                var dataApplications = await (from u in context.Users
+                                              join
+                      ha in context.HubAreas on u.HubId equals ha.HubId
+                                              join
+           ar in context.Areas on ha.AreaId equals ar.Id
+                                              join
+           a in context.DsrApplicationForm on ar.Id equals a.AreaId
+                                              where u.Id == userId && ar.IsActive== true
+                                              select new
+                                              {
+                                                  Id = a.Id,
+                                                  Name = a.FirstName + " " + a.LastName,
+                                                  DOB = a.Dob,
+                                                  ContactNumber = a.ContactNumber,
+                                                  SubmitDate = a.SubmitDate == null ? "N/A" : Convert.ToDateTime(a.SubmitDate).ToString("yyyy-MM-dd"),
+                                                  Area = ar.AreaCode + " - " + ar.AreaName,
+                                                  Status = a.RejectedDate != null ? "Rejected" : a.ApprovedDate != null ? "Approved" : "Submitted"
+                                              }).ToListAsync();
+                dataApplications = dataApplications.OrderByDescending(x => x.SubmitDate).ToList();
+                return Json(new { data = dataApplications }, new Newtonsoft.Json.JsonSerializerSettings());
+            }
+            else
+            {
+
+                var dataApplications = await (from a in context.DsrApplicationForm
+                                              join ci in context.Areas on a.AreaId equals ci.Id
+                                              select new
+                                              {
+                                                  Id = a.Id,
+                                                  Name = a.FirstName + " " + a.LastName,
+                                                  DOB = a.Dob,
+                                                  ContactNumber = a.ContactNumber,
+                                                  SubmitDate = a.SubmitDate == null ? "N/A" : Convert.ToDateTime(a.SubmitDate).ToString("yyyy-MM-dd"),
+                                                  Area = ci.AreaCode + " - " + ci.AreaName,
+                                                  Status = a.RejectedDate != null ? "Rejected" : a.ApprovedDate != null ? "Approved" : "Submitted"
+                                              }).ToListAsync();
+                dataApplications = dataApplications.OrderByDescending(x => x.SubmitDate).ToList();
+                return Json(new { data = dataApplications }, new Newtonsoft.Json.JsonSerializerSettings());
+            }
         }
 
         [HttpGet]

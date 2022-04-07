@@ -38,8 +38,8 @@ namespace BlessedMuslim.Controllers
                     var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
 
                     identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, email));
-                    identity.AddClaim(new Claim(ClaimTypes.Name, email));
-                    identity.AddClaim(new Claim(ClaimTypes.UserData, user.Id.ToString()));
+                    identity.AddClaim(new Claim(ClaimTypes.Name, user.Id.ToString()));
+                    identity.AddClaim(new Claim(ClaimTypes.UserData, email));
                     identity.AddClaim(new Claim(ClaimTypes.Role, user.Role.RoleName));
 
                     var principal = new ClaimsPrincipal(identity);
