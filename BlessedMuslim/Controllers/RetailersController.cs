@@ -80,7 +80,6 @@ namespace BlessedMuslim.Controllers
                                           join c in context.Cities on rt.CityCode equals c.Id
                                           select new
                                           {
-
                                               Id = rt.Id,
                                               BusinessName = rt.BusinessName,
                                               BusinessCatName = bc.Sdesc,
@@ -90,6 +89,7 @@ namespace BlessedMuslim.Controllers
                                               Email = rt.Email,
                                               ContactPerson = rt.ContactPerson,
                                               ContactNumber = "Shop:" + rt.ShopPhone + " / Mobile :" + rt.MobileNumber,
+                                              Comments = rt.Comments,
                                               RefCode = rt.ReferenceCode,
                                               CreatedDate = rt.CreatedDate == null ? "N/A" : Convert.ToDateTime(rt.CreatedDate).ToString("yyyy-MM-dd")
                                           }).ToListAsync();
@@ -115,6 +115,8 @@ namespace BlessedMuslim.Controllers
                                               ShopPhone = rt.ShopPhone,
                                               MobileNumber = rt.MobileNumber,
                                               RefCode = rt.ReferenceCode,
+                                              Comments= rt.Comments,
+                                              ContactNumber = rt.MobileNumber,
                                               CreatedDate = rt.CreatedDate == null ? "N/A" : Convert.ToDateTime(rt.CreatedDate).ToString("yyyy-MM-dd")
                                           }).ToListAsync();
             return View(dataApplications[0]);

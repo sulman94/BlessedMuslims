@@ -20,6 +20,7 @@ namespace BlessedMuslim.Models
         public string ShopPhone { get; set; }
         public string MobileNumber { get; set; }
         public string RefCode { get; set; }
+        public string Comments { get; set; }
         public string CreatedDate { get; set; }
     }
 }

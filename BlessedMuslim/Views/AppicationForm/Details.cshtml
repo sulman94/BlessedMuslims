@@ -36,7 +36,19 @@
 
                 </div>
             </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Gender</span>
+                    </div>
 
+                    @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>{
+        new SelectListItem{ Text="Male", Value="Male"},
+        new SelectListItem{ Text="Female", Value="Female"}
+        }, "--- Select Gender ---", new { @class = "form-control", required = "required", @disabled = "disabled" })
+
+                </div>
+            </div>
             <div class="col-12 col-md-6">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
@@ -63,7 +75,19 @@
 
                 </div>
             </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Email</span>
+                    </div>
+                    @Html.EditorFor(model => model.Email, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
 
+                </div>
+            </div>
             <div class="col-12 col-md-12">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
@@ -107,7 +131,7 @@
             <div class="col-12 col-md-6">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Area</span>
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Interested Area</span>
                     </div>
                     @Html.EditorFor(model => model.AreaName, new
                {
@@ -117,7 +141,89 @@
 
                 </div>
             </div>
-            <div class="col-12 col-md-6">   
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Phone 1</span>
+                    </div>
+                    @Html.EditorFor(model => model.Phone1, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Phone 2</span>
+                    </div>
+                    @Html.EditorFor(model => model.Phone2, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
+
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Date Of Joining</span>
+                    </div>
+                    @Html.EditorFor(model => model.DateOfJoining, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
+
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Account #</span>
+                    </div>
+                    @Html.EditorFor(model => model.AccountNo, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
+
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Sort Code</span>
+                    </div>
+                    @Html.EditorFor(model => model.SortCode, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
+
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Reference Code</span>
+                    </div>
+                    @Html.EditorFor(model => model.ReferenceCode, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text width-100" id="inputGroup-sizing-sm">Submit Date</span>
@@ -127,6 +233,45 @@
                            htmlAttributes =
                             new { @class = "form-control", required = "required", @disabled = "disabled" }
                        })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Approved Date</span>
+                    </div>
+                    @Html.EditorFor(model => model.ApprovedDate, new
+                       {
+                           htmlAttributes =
+                            new { @class = "form-control", required = "required", @disabled = "disabled" }
+                       })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Rejected Date</span>
+                    </div>
+                    @Html.EditorFor(model => model.RejectedDate, new
+                       {
+                           htmlAttributes =
+                            new { @class = "form-control", required = "required", @disabled = "disabled" }
+                       })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-12">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Remarks</span>
+                    </div>
+                    @Html.EditorFor(model => model.Remarks, new
+               {
+                   htmlAttributes =
+                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+               })
 
                 </div>
             </div>

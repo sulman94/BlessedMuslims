@@ -40,7 +40,7 @@
             <div class="col-12 col-md-6">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Last Name</span>
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Gender</span>
                     </div>
 
                     @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>{
@@ -90,6 +90,7 @@
 
                 </div>
             </div>
+
             <div class="col-12 col-md-12">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
@@ -219,6 +220,45 @@
                    htmlAttributes =
                     new { @class = "form-control", required = "required" }
                })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Submit Date</span>
+                    </div>
+                    @Html.EditorFor(model => model.SubmitDate, new
+                       {
+                           htmlAttributes =
+                            new { @class = "form-control", required = "required", @disabled = "disabled" }
+                       })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Approved Date</span>
+                    </div>
+                    @Html.EditorFor(model => model.ApprovedDate, new
+                       {
+                           htmlAttributes =
+                            new { @class = "form-control", required = "required" }
+                       })
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Rejected Date</span>
+                    </div>
+                    @Html.EditorFor(model => model.RejectedDate, new
+                       {
+                           htmlAttributes =
+                            new { @class = "form-control", required = "required" }
+                       })
 
                 </div>
             </div>

@@ -178,10 +178,21 @@ namespace BlessedMuslim.Controllers
                                               FirstName = a.FirstName,
                                               LastName = a.LastName,
                                               Dob = Convert.ToDateTime(a.Dob).ToString("yyyy-MM-dd"),
+                                              Gender = a.Gender,
+                                              AccountNo = a.AccountNo,
+                                              ApprovedDate= a.ApprovedDate,
+                                              DateOfJoining = a.DateOfJoining,
+                                              Phone1 = a.Phone1, 
+                                              Phone2 = a.Phone2,
+                                              ReferenceCode = a.ReferenceCode,
+                                              RejectedDate = a.RejectedDate,
+                                              SortCode = a.SortCode,
                                               ContactNumber = a.ContactNumber,
                                               AddressLine1 = a.AddressLine1,
+                                              Email = a.Email,
                                               AddressLine2 = a.AddressLine2,
                                               PostCode = a.PostCode,
+                                              Remarks  = a.Remarks,
                                               AreaName = ci.AreaCode + " - " + ci.AreaName,
                                               SubmitDate = a.SubmitDate == null ? "N/A" : Convert.ToDateTime(a.SubmitDate).ToString()
                                           }).ToListAsync();
@@ -200,10 +211,28 @@ namespace BlessedMuslim.Controllers
         {
             try
             {
-                //var dbEntry = context.Entry(data);
-                //dbEntry.Property("CountryCode").IsModified = true;
-                //dbEntry.Property("CountryName").IsModified = true;
-
+                data.ModifiedDate = DateTime.Now;
+                var dbEntry = context.Entry(data);
+                dbEntry.Property("FirstName").IsModified = true;
+                dbEntry.Property("LastName").IsModified = true;
+                dbEntry.Property("DOB").IsModified = true;
+                dbEntry.Property("AddressLine1").IsModified = true;
+                dbEntry.Property("AddressLine2").IsModified = true;
+                dbEntry.Property("PostCode").IsModified = true;
+                dbEntry.Property("ContactNumber").IsModified = true;
+                dbEntry.Property("AreaId").IsModified = true;
+                dbEntry.Property("ApprovedDate").IsModified = true;
+                dbEntry.Property("RejectedDate").IsModified = true;
+                dbEntry.Property("Remarks").IsModified = true;
+                dbEntry.Property("ModifiedDate").IsModified = true;
+                dbEntry.Property("Email").IsModified = true;
+                dbEntry.Property("Gender").IsModified = true;
+                dbEntry.Property("Phone1").IsModified = true;
+                dbEntry.Property("Phone2").IsModified = true;
+                dbEntry.Property("DateOfJoining").IsModified = true;
+                dbEntry.Property("AccountNo").IsModified = true;
+                dbEntry.Property("SortCode").IsModified = true;
+                dbEntry.Property("ReferenceCode").IsModified = true;
                 await context.SaveChangesAsync();
                 ViewBag.result = "Record Updated Successfully!";
             }
