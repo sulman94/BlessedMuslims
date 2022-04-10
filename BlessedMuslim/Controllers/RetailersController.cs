@@ -121,7 +121,24 @@ namespace BlessedMuslim.Controllers
                                           }).ToListAsync();
             return View(dataApplications[0]);
         }
-
+        public async Task<ActionResult> PrintCertificate(int Id)
+        {
+            var dataApplications = await (from rt in context.Retailers
+                                          where rt.Id == Id
+                                          select new RetailersView
+                                          {
+                                              Id = rt.Id,
+                                              BusinessName = rt.BusinessName,
+                                              CreatedDate = rt.CreatedDate == null ? "N/A" : Convert.ToDateTime(rt.CreatedDate).ToString("dddd, dd MMMM yyyy")
+                                          }).ToListAsync();
+            
+            ViewBag.CertificateTitle = await context.Config.Where(x => x.ConfigCode == "CertificateTitle").Select(x => x.ConfigValue).FirstOrDefaultAsync();
+            ViewBag.CertificateContent1 = await context.Config.Where(x => x.ConfigCode == "CertificateContent1").Select(x => x.ConfigValue).FirstOrDefaultAsync();
+            ViewBag.CertificateContent2 = await context.Config.Where(x => x.ConfigCode == "CertificateContent2").Select(x => x.ConfigValue).FirstOrDefaultAsync();
+            ViewBag.CertificationType = await context.Config.Where(x => x.ConfigCode == "CertificationType").Select(x => x.ConfigValue).FirstOrDefaultAsync();
+            ViewBag.CertificationWith = await context.Config.Where(x => x.ConfigCode == "CertificationWith").Select(x => x.ConfigValue).FirstOrDefaultAsync();
+            return View(dataApplications[0]);
+        }
         //// GET: Retailers
         //public async Task<IActionResult> Index()
         //{

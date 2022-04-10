@@ -7,6 +7,10 @@
     <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\BM_LOGO.png" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -84,11 +88,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
-
-
-  <ItemGroup>
     <UpToDateCheckInput Remove="Views\BusinessCategories\Add.cshtml" />
   </ItemGroup>
 
@@ -101,6 +100,13 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Employees\Add.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Include="Views\Retailers\BM_LOGO.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

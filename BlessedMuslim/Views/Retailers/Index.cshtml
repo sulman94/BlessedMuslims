@@ -22,7 +22,7 @@
             "columnDefs": [
                 {
                     "data": null,
-                    "defaultContent": userRole == "Admin" ? "<button id='detailView' class='btn btn-dark'>View</button>" : "<button id='detailView' class='btn btn-dark'>View</button>",
+                    "defaultContent": userRole == "Admin" ? "<button id='detailView' class='btn btn-dark'>View</button><button id='PrintCertificate' class='btn btn-dark'>Certificate</button>" : "<button id='detailView' class='btn btn-dark'>View</button>",
                     "targets": -1,
                     "orderable": false,
                 }
@@ -35,6 +35,12 @@
         $('#example tbody').on('click', '#detailView', function () {
             var data = table.row( $(this).parents('tr') ).data();
             var url = '@Url.Action("Details", "Retailers", new { id = "__id__" })';
+            window.location.href = url.replace('__id__', data.Id);
+        });
+
+        $('#example tbody').on('click', '#PrintCertificate', function () {
+            var data = table.row( $(this).parents('tr') ).data();
+            var url = '@Url.Action("PrintCertificate", "Retailers", new { id = "__id__" })';
             window.location.href = url.replace('__id__', data.Id);
         });
     });
