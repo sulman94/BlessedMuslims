@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlessedMuslim.Models
 {
@@ -24,6 +25,9 @@ namespace BlessedMuslim.Models
         public DateTime? ModifiedDate { get; set; }
         public long? ModifiedBy { get; set; }
         public bool? IsUserCreated { get; set; }
+        [Required(ErrorMessage = "The email address is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [RegularExpression(@"^[A-Za-z0-9]+@([a-zA-Z]+\\.)+[a-zA-Z]{2,6}]&")]
         public string Email { get; set; }
         public string Gender { get; set; }
         public string Phone1 { get; set; }

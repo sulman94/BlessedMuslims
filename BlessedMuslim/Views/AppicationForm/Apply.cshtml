@@ -31,7 +31,7 @@
                     @Html.EditorFor(model => model.FirstName, new
                {
                    htmlAttributes =
-                    new { @class = "form-control", required = "required" }
+                    new { @class = "form-control alphabets-only", required = "required" }
                })
 
                 </div>
@@ -44,7 +44,7 @@
                     @Html.EditorFor(model => model.LastName, new
                {
                    htmlAttributes =
-                    new { @class = "form-control", required = "required" }
+                    new { @class = "form-control alphabets-only", required = "required" }
                })
 
                 </div>
@@ -52,7 +52,7 @@
             <div class="col-12 col-md-6">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Last Name</span>
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Gender</span>
                     </div>
 
                     @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>{
@@ -71,7 +71,7 @@
                     @Html.EditorFor(model => model.Dob, new
                {
                    htmlAttributes =
-                    new { @class = "form-control", required = "required" }
+                    new { @class = "form-control", required = "required", type= "date" }
                })
 
                 </div>
@@ -84,9 +84,8 @@
                     @Html.EditorFor(model => model.ContactNumber, new
                {
                    htmlAttributes =
-                    new { @class = "form-control", required = "required" }
+                    new { @class = "form-control numbers-only", required = "required" }
                })
-
                 </div>
             </div>
             <div class="col-12 col-md-6">
