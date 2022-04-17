@@ -64,7 +64,7 @@
                     @Html.EditorFor(model => model.Email, new
                {
                    htmlAttributes =
-                        new { @class = "form-control", required = "required", autocomplete = "off" }
+                        new { @class = "form-control", required = "required", autocomplete = "off", type="email" }
                })
                 </div>
             </div>
@@ -85,7 +85,7 @@
                     @Html.EditorFor(model => model.Phone, new
                {
                    htmlAttributes =
-                                new { @class = "form-control", required = "required", autocomplete = "off" }
+                                new { @class = "form-control numbers-only", required = "required", autocomplete = "off" }
                })
                 </div>
             </div>

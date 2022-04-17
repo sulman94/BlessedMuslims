@@ -10,13 +10,15 @@
 <div class="outer-border" id="certificate">
     <div class="inner-dotted-border">
         <div><img src="~/content/BM_LOGO.png" style="width:135px;" /></div>
-        
+
         <span class="certification cursive1 col-xs-12 text-center">@ViewBag.CertificateTitle</span>
         <br><br>
-        <span class="certify"><i>@ViewBag.CertificateContent1</i></span> <br><br>
-        <span class="name"><b>@Retailer.BusinessName.ToString()</b></span><br /><br />
-        <span class="certify"><i>@ViewBag.CertificateContent2</i></span> <br /><br />
-        <span class="fs-30">@ViewBag.CertificationType</span> <br /><br />
+        <h4>This is to Certify that Business Name</h4>
+        <span class="certify"><i>@ViewBag.CertificateContent1</i></span> <br>
+        <span class="name"><b>@Retailer.BusinessName.ToString()</b></span><br />
+        <p>has been affiliated with Blessed Muslim</p>
+        <span class="certify"><i>@ViewBag.CertificateContent2</i></span> <br />
+        <span class="fs-30">@ViewBag.CertificationType</span> <br />
         <span class="fs-20">with</span> <br />
         <span class="certification pm-certificate-title cursive col-xs-12 text-center">@ViewBag.CertificationWith</span><br />
         <span class="certify"><i>Dated</i></span><br>

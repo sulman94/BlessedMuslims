@@ -112,7 +112,7 @@
                     @Html.EditorFor(model => model.Landline, new
                {
                    htmlAttributes =
-                        new { @class = "form-control", @type = "number" }
+                        new { @class = "form-control numbers-only" }
                }
                         )
                 </div>
@@ -126,7 +126,7 @@
                     @Html.EditorFor(model => model.MobileNumber, new
                     {
                         htmlAttributes =
-                        new { @class = "form-control", @type = "number" }
+                        new { @class = "form-control numbers-only" }
                     })
                 </div>
             </div>
@@ -138,7 +138,7 @@
                     @Html.EditorFor(model => model.JoiningDate, new
                     {
                         htmlAttributes =
-                        new { @class = "form-control" }
+                        new { @class = "form-control" , type="date" }
                     })
                 </div>
             </div>

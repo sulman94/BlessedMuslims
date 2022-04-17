@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlessedMuslim.Models
 {
@@ -12,6 +13,9 @@ namespace BlessedMuslim.Models
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string PostCode { get; set; }
+        [Required(ErrorMessage = "The email address is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [RegularExpression(@"^[A-Za-z0-9]+@([a-zA-Z]+\\.)+[a-zA-Z]{2,6}]&")]
         public string Email { get; set; }
         public string ContactPerson { get; set; }
         public string ShopPhone { get; set; }
