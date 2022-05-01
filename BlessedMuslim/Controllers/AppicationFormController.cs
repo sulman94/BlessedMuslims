@@ -1,11 +1,13 @@
 ﻿using BlessedMuslim.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,6 +16,11 @@ namespace BlessedMuslim.Controllers
     [Authorize(Roles = "Admin,Manager")]
     public class AppicationFormController : Controller
     {
+        private IHostingEnvironment _environment;
+        public AppicationFormController(IHostingEnvironment environment)
+        {
+            _environment = environment;
+        }
         private readonly BlessedMuslim_DBContext context = new BlessedMuslim_DBContext();
         // GET: AppicationFormController
 
@@ -37,14 +44,35 @@ namespace BlessedMuslim.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Apply(DsrApplicationForm data)
+        public async Task<ActionResult> Apply(DsrApplicationForm data, IFormFile files, IFormFile Documents)
         {
             var context = new BlessedMuslim_DBContext();
             try
             {
                 if (data.TermsAgreement)
                 {
+                    string userimg = "";
+                    string Doc = "";
+                    if (files != null)
+                    {
+                        if (files.Length > 0)
+                        {
+                            SaveImg(files, ref userimg);
+                        }
+
+                    }
+                    if (Documents != null)
+                    {
+                        if (Documents.Length > 0)
+                        {
+                            SaveImg(Documents, ref Doc);
+                        }
+
+                    }
                     data.SubmitDate = DateTime.Now;
+                    data.Photo = userimg.Length > 0 ? userimg : null;
+                    data.Idphoto = Doc.Length > 0 ? Doc : null;
+
                     context.DsrApplicationForm.Add(data);
                     await context.SaveChangesAsync();
                     ViewBag.ThankyouMsg = await context.Config.Where(x => x.ConfigCode == "ThankyouMessage").Select(x => x.ConfigValue).FirstOrDefaultAsync();
@@ -90,6 +118,8 @@ namespace BlessedMuslim.Controllers
                                               select new
                                               {
                                                   Id = a.Id,
+                                                  Photo = a.Photo,
+                                                  IdPhoto = a.Idphoto,
                                                   Name = a.FirstName + " " + a.LastName,
                                                   DOB = a.Dob,
                                                   ContactNumber = a.ContactNumber,
@@ -108,6 +138,8 @@ namespace BlessedMuslim.Controllers
                                               select new
                                               {
                                                   Id = a.Id,
+                                                  Photo = a.Photo,
+                                                  IdPhoto = a.Idphoto,
                                                   Name = a.FirstName + " " + a.LastName,
                                                   DOB = a.Dob,
                                                   ContactNumber = a.ContactNumber,
@@ -180,9 +212,9 @@ namespace BlessedMuslim.Controllers
                                               Dob = Convert.ToDateTime(a.Dob).ToString("yyyy-MM-dd"),
                                               Gender = a.Gender,
                                               AccountNo = a.AccountNo,
-                                              ApprovedDate= a.ApprovedDate,
+                                              ApprovedDate = a.ApprovedDate,
                                               DateOfJoining = a.DateOfJoining,
-                                              Phone1 = a.Phone1, 
+                                              Phone1 = a.Phone1,
                                               Phone2 = a.Phone2,
                                               ReferenceCode = a.ReferenceCode,
                                               RejectedDate = a.RejectedDate,
@@ -192,9 +224,11 @@ namespace BlessedMuslim.Controllers
                                               Email = a.Email,
                                               AddressLine2 = a.AddressLine2,
                                               PostCode = a.PostCode,
-                                              Remarks  = a.Remarks,
+                                              Remarks = a.Remarks,
                                               AreaName = ci.AreaCode + " - " + ci.AreaName,
-                                              SubmitDate = a.SubmitDate == null ? "N/A" : Convert.ToDateTime(a.SubmitDate).ToString()
+                                              SubmitDate = a.SubmitDate == null ? "N/A" : Convert.ToDateTime(a.SubmitDate).ToString(),
+                                              Photo = a.Photo,
+                                              IdPhoto = a.Idphoto
                                           }).ToListAsync();
             return View(dataApplications[0]);
         }
@@ -207,10 +241,37 @@ namespace BlessedMuslim.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(DsrApplicationForm data)
+        public async Task<IActionResult> Edit(DsrApplicationForm data, IFormFile files, IFormFile Documents)
         {
             try
             {
+                string userimg = "";
+                string Doc = "";
+                if (files != null)
+                {
+                    if (files.Length > 0)
+                    {
+                        SaveImg(files, ref userimg);
+                    }
+
+                }
+                if (Documents != null)
+                {
+                    if (Documents.Length > 0)
+                    {
+                        SaveImg(Documents, ref Doc);
+                    }
+
+                }
+                if ((data.Photo == null && userimg.Length > 0) || (data.Photo != null && userimg.Length > 0))
+                {
+                    data.Photo = userimg;
+                }
+                if ((data.Idphoto == null && Doc.Length > 0) || (data.Idphoto != null && Doc.Length > 0))
+                {
+                    data.Idphoto = Doc;
+                }
+
                 data.ModifiedDate = DateTime.Now;
                 var dbEntry = context.Entry(data);
                 dbEntry.Property("FirstName").IsModified = true;
@@ -242,6 +303,29 @@ namespace BlessedMuslim.Controllers
                 ViewBag.error = e.Message;
             }
             return RedirectToAction("Index");
+        }
+
+        public void SaveImg(IFormFile files, ref string newFileName)
+        {
+            var allowedExtensions = new[] {
+                        ".Jpg", ".png", ".jpg", ".jpeg",".PNG"
+                    };
+            var ext = Path.GetExtension(files.FileName);
+            if (allowedExtensions.Contains(ext))
+            {
+                var fileName = Path.GetFileName(files.FileName);
+                var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+                var fileExtension = Path.GetExtension(fileName);
+                newFileName = String.Concat(myUniqueFileName, fileExtension);
+                var uploads = Path.Combine(_environment.WebRootPath, "Documents");
+                var filepath = Path.Combine(uploads, newFileName);
+                //var filepath = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Documents")).Root + $@"\{newFileName}";
+                using (FileStream fs = System.IO.File.Create(filepath))
+                {
+                    files.CopyTo(fs);
+                    fs.Flush();
+                }
+            }
         }
     }
 }

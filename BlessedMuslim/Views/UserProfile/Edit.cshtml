@@ -21,14 +21,7 @@
 
             </div>
         </div>
-        <div class="col-12 col-md-6">
-            <div>
-                <img id="user_img"
-                     height="120"
-                     width="100"
-                     style="border: 1px solid ; float: right; margin-bottom: 20px; " src="~/Documents/@Model.UserImage" />
-            </div>
-        </div>
+       
         <div class="col-12 col-md-6">
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
@@ -133,16 +126,7 @@
 
             </div>
         </div>
-        <div class="col-12 col-md-12">
-            <div>
-                <img id="user_Doc"
-                     height="500"
-                     width="400"
-                     style="border: 0px ; float: right; margin-bottom: 20px; " src="~/Documents/@Model.Document" />
-            </div>
-        </div>
-        @Html.HiddenFor(model => model.UserImage, new { @Value = Model.UserImage })
-        @Html.HiddenFor(model => model.Document, new { @Value = Model.Document })
+       
     </div>
 
     <div class="row">
@@ -206,25 +190,6 @@
             }
         });
     });
-
-    function show(input, id) {
-        var fileTypes = ["Jpg", "png", "jpg", "jpeg", "PNG"];
-        if (input.files && input.files[0]) {
-            var filerdr = new FileReader();
-            var extension = input.files[0].name.split('.').pop().toLowerCase();
-            var isSuccess = fileTypes.indexOf(extension) > -1;
-            if (isSuccess) {
-                filerdr.onload = function (e) {
-                    $('#' + id).attr('src', e.target.result);
-                }
-                filerdr.readAsDataURL(input.files[0]);
-            }
-            else {
-                alert("Please select Image in this Format (Jpg,png,jpeg)");
-            }
-
-        }
-    }
 </script>
 }
 

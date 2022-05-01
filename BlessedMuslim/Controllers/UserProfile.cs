@@ -9,7 +9,6 @@ using BlessedMuslim.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.IO;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Hosting;
 
 namespace BlessedMuslim.Controllers
@@ -18,11 +17,6 @@ namespace BlessedMuslim.Controllers
     [Authorize(Roles = "Admin")]
     public class UserProfile : Controller
     {
-        private IHostingEnvironment _environment;
-        public UserProfile(IHostingEnvironment environment)
-        {
-            _environment = environment;
-        }
         private readonly BlessedMuslim_DBContext context = new BlessedMuslim_DBContext();
 
         [HttpGet]
@@ -64,40 +58,19 @@ namespace BlessedMuslim.Controllers
             return View(new Users());
         }
         [HttpPost]
-        public async Task<IActionResult> Add(Users data, IFormFile files, IFormFile Documents)
+        public async Task<IActionResult> Add(Users data)
         {
             try
             {
-                string userimg = "";
-                string Doc = "";
-                if (files != null)
-                {
-                    if (files.Length > 0)
-                    {
-                        SaveImg(files, ref userimg);
-                    }
-
-                }
-                if (Documents != null)
-                {
-                    if (Documents.Length > 0)
-                    {
-                        SaveImg(Documents, ref Doc);
-                    }
-
-                }
                 var SaleRep = await context.DsrApplicationForm.Where(c => c.Id == data.Id).FirstOrDefaultAsync();
                 data.CreatedDate = DateTime.Now;
                 data.Id = 0;
-                data.UserImage = userimg.Length > 0 ? userimg : null;
-                data.Document = Doc.Length > 0 ? Doc : null;
                 context.Add(data);
                 if (SaleRep != null)
                 {
                     SaleRep.IsUserCreated = true;
                     context.Update(SaleRep);
                 }
-
                 await context.SaveChangesAsync();
                 ViewBag.result = "Record Saved Successfully!";
 
@@ -111,28 +84,7 @@ namespace BlessedMuslim.Controllers
             ModelState.Clear();
             return RedirectToAction("Index");
         }
-        public void SaveImg(IFormFile files, ref string newFileName)
-        {
-            var allowedExtensions = new[] {
-                        ".Jpg", ".png", ".jpg", ".jpeg",".PNG"
-                    };
-            var ext = Path.GetExtension(files.FileName);
-            if (allowedExtensions.Contains(ext))
-            {
-                var fileName = Path.GetFileName(files.FileName);
-                var myUniqueFileName = Convert.ToString(Guid.NewGuid());
-                var fileExtension = Path.GetExtension(fileName);
-                newFileName = String.Concat(myUniqueFileName, fileExtension);
-                var uploads = Path.Combine(_environment.WebRootPath, "Documents");
-                var filepath = Path.Combine(uploads, newFileName);
-                //var filepath = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Documents")).Root + $@"\{newFileName}";
-                using (FileStream fs = System.IO.File.Create(filepath))
-                {
-                    files.CopyTo(fs);
-                    fs.Flush();
-                }
-            }
-        }
+        
         public async Task<IActionResult> Edit(int Id)
         {
             int _min = 1000;
@@ -147,37 +99,10 @@ namespace BlessedMuslim.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Users data, IFormFile files, IFormFile Documents)
+        public async Task<IActionResult> Edit(Users data)
         {
             try
             {
-                string userimg = "";
-                string Doc = "";
-                if (files != null)
-                {
-                    if (files.Length > 0)
-                    {
-                        SaveImg(files, ref userimg);
-                    }
-
-                }
-                if (Documents != null)
-                {
-                    if (Documents.Length > 0)
-                    {
-                        SaveImg(Documents, ref Doc);
-                    }
-
-                }
-                if ((data.UserImage == null && userimg.Length > 0) || (data.UserImage != null && userimg.Length > 0))
-                {
-                    data.UserImage = userimg;
-                }
-                if ((data.Document == null && Doc.Length > 0) || (data.Document != null && Doc.Length > 0))
-                {
-                    data.Document = Doc;
-                }
-
                 var dbEntry = context.Entry(data);
                 dbEntry.Property("Name").IsModified = true;
                 dbEntry.Property("Email").IsModified = true;

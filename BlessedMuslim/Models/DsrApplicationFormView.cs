@@ -28,5 +28,7 @@ namespace BlessedMuslim.Models
         public string SortCode { get; set; }
         public string ReferenceCode { get; set; }
         public string Remarks { get; set; }
+        public string Photo { get; set; }
+        public string IdPhoto { get; set; }
     }
 }

@@ -22,8 +22,6 @@ namespace BlessedMuslim.Models
         public DateTime? LastLoginDate { get; set; }
         public int? ReportTo { get; set; }
         public string HubId { get; set; }
-        public string UserImage { get; set; }
-        public string Document { get; set; }
         public virtual Role Role { get; set; }
         public virtual ICollection<DsrApplicationForm> DsrApplicationForm { get; set; }
         public virtual ICollection<Retailers> Retailers { get; set; }
