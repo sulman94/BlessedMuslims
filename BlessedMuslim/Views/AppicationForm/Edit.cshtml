@@ -30,6 +30,24 @@
                          style="border: 0px ; float: right; margin-bottom: 20px; " src="~/Documents/@Model.Idphoto" />
                 </div>
             </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Applicant Photo</span>
+                    </div>
+                    <input type="file" title="Upload User Image" name="files" onchange="show(this,'user_img')" accept="image/*" />
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Applicant ID Card</span>
+                    </div>
+                    <input type="file" title="Upload Documents" name="Documents" onchange="show(this,'user_Doc')" accept="image/*" />
+
+                </div>
+            </div>
             @Html.HiddenFor(model => model.Photo, new { @Value = Model.Photo })
             @Html.HiddenFor(model => model.Idphoto, new { @Value = Model.Idphoto })
             <div class="col-12 col-md-6">
