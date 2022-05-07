@@ -276,7 +276,7 @@ namespace BlessedMuslim.Controllers
                 var dbEntry = context.Entry(data);
                 dbEntry.Property("FirstName").IsModified = true;
                 dbEntry.Property("LastName").IsModified = true;
-                dbEntry.Property("DOB").IsModified = true;
+                dbEntry.Property("Dob").IsModified = true;
                 dbEntry.Property("AddressLine1").IsModified = true;
                 dbEntry.Property("AddressLine2").IsModified = true;
                 dbEntry.Property("PostCode").IsModified = true;
@@ -294,6 +294,8 @@ namespace BlessedMuslim.Controllers
                 dbEntry.Property("AccountNo").IsModified = true;
                 dbEntry.Property("SortCode").IsModified = true;
                 dbEntry.Property("ReferenceCode").IsModified = true;
+                dbEntry.Property("Photo").IsModified = true;
+                dbEntry.Property("Idphoto").IsModified = true;
                 await context.SaveChangesAsync();
                 ViewBag.result = "Record Updated Successfully!";
             }
