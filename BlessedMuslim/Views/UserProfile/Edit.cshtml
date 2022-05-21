@@ -7,7 +7,7 @@
 {
 @Html.AntiForgeryToken()
 <div class="form-horizontal">
-    <h4>Edit Users</h4>
+    <h6>Edit Users</h6>
     <hr />
     <div class="row">
         <div class="col-12 col-md-6">
@@ -21,7 +21,7 @@
 
             </div>
         </div>
-       
+
         <div class="col-12 col-md-6">
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
@@ -108,7 +108,7 @@
 
             </div>
         </div>
-       
+
     </div>
 
     <div class="row">
@@ -119,24 +119,24 @@
             </div>
         </div>
     </div>
-
+    <a asp-action="Index">Back to List</a>
     @if (!String.IsNullOrEmpty(ViewBag.error))
-        {
-    <div class="mt-2">
-        <div class="alert alert-danger" role="alert">
-            @ViewBag.error
+    {
+        <div class="mt-2">
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.error
+            </div>
         </div>
-    </div>
-        }
+    }
 
     @if (!String.IsNullOrEmpty(ViewBag.result))
-        {
-    <div class="mt-2">
-        <div class="alert alert-success" role="alert">
-            @ViewBag.result
+    {
+        <div class="mt-2">
+            <div class="alert alert-success" role="alert">
+                @ViewBag.result
+            </div>
         </div>
-    </div>
-        }
+    }
 
 </div>
 
