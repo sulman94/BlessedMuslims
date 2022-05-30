@@ -6,6 +6,11 @@ namespace BlessedMuslim.Models
 {
     public partial class Retailers
     {
+        public Retailers()
+        {
+            PaymentDetails = new HashSet<PaymentDetails>();
+        }
+
         public long Id { get; set; }
         public string BusinessName { get; set; }
         public int? BusinessCategoryId { get; set; }
@@ -33,5 +38,6 @@ namespace BlessedMuslim.Models
 
         public virtual Cities CityCodeNavigation { get; set; }
         public virtual Users RegByNavigation { get; set; }
+        public virtual ICollection<PaymentDetails> PaymentDetails { get; set; }
     }
 }

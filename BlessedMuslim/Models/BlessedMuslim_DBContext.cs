@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 
 namespace BlessedMuslim.Models
@@ -23,6 +25,7 @@ namespace BlessedMuslim.Models
         public virtual DbSet<DsrApplicationForm> DsrApplicationForm { get; set; }
         public virtual DbSet<HubAreas> HubAreas { get; set; }
         public virtual DbSet<HubMaster> HubMaster { get; set; }
+        public virtual DbSet<PaymentDetails> PaymentDetails { get; set; }
         public virtual DbSet<Retailers> Retailers { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<States> States { get; set; }
@@ -298,6 +301,42 @@ namespace BlessedMuslim.Models
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<PaymentDetails>(entity =>
+            {
+                entity.HasKey(e => e.PaymentId)
+                    .HasName("PK__PaymentD__9B556A38A27A592A");
+
+                entity.Property(e => e.AmountDue).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.AmountPaid).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Attachment).IsUnicode(false);
+
+                entity.Property(e => e.Details)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PaymentMode)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PaymentStatus)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TransactionNumber).HasMaxLength(450);
+
+                entity.HasOne(d => d.Retailer)
+                    .WithMany(p => p.PaymentDetails)
+                    .HasForeignKey(d => d.RetailerId)
+                    .HasConstraintName("FK_PaymentDetails_Retailers");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.PaymentDetails)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_PaymentDetails_Users");
             });
 
             modelBuilder.Entity<Retailers>(entity =>
