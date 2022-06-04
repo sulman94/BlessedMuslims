@@ -17,10 +17,10 @@
                         <span class="input-group-text width-100" id="inputGroup-sizing-sm">Charity Code</span>
                     </div>
                     @Html.EditorFor(model => model.CharityId, new
-                    {
-                        htmlAttributes =
-                        new { @class = "form-control", required = "required" }
-                    })
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", required = "required", @readonly = "readonly" }
+               })
                 </div>
             </div>
 
