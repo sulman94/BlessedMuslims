@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
@@ -36,9 +38,9 @@ namespace BlessedMuslim.Models
             if (!optionsBuilder.IsConfigured)
             {
                 IConfigurationRoot configuration = new ConfigurationBuilder()
-                                //.SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
-                                .AddJsonFile("appsettings.json")
-                                .Build();
+                .SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
+                .AddJsonFile("appsettings.json")
+                .Build();
                 optionsBuilder.UseSqlServer(configuration.GetConnectionString("MBDbConstr"));
             }
         }
@@ -305,9 +307,6 @@ namespace BlessedMuslim.Models
 
             modelBuilder.Entity<PaymentDetails>(entity =>
             {
-                entity.HasKey(e => e.PaymentId)
-                    .HasName("PK__PaymentD__9B556A38A27A592A");
-
                 entity.Property(e => e.AmountDue).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.AmountPaid).HasColumnType("decimal(18, 2)");
@@ -319,11 +318,11 @@ namespace BlessedMuslim.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.PaymentMode)
-                    .HasMaxLength(10)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PaymentStatus)
-                    .HasMaxLength(10)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.TransactionNumber).HasMaxLength(450);
