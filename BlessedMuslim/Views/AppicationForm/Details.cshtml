@@ -7,7 +7,7 @@
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
-        <h6>View Areas</h6>
+        <h6>View Applicants</h6>
         <hr />
         <div class="row">
             <div class="col-12 col-md-6">
@@ -76,7 +76,7 @@
                     @Html.EditorFor(model => model.Dob, new
                {
                    htmlAttributes =
-                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+                    new { @class = "form-control", required = "required", type = "date" , @disabled = "disabled" }
                })
 
                 </div>
@@ -195,7 +195,7 @@
                     @Html.EditorFor(model => model.DateOfJoining, new
                {
                    htmlAttributes =
-                    new { @class = "form-control", required = "required", @disabled = "disabled" }
+                    new { @class = "form-control", required = "required", @disabled = "disabled",  type = "date" }
                })
 
                 </div>
@@ -250,7 +250,7 @@
                     @Html.EditorFor(model => model.SubmitDate, new
                        {
                            htmlAttributes =
-                            new { @class = "form-control", required = "required", @disabled = "disabled" }
+                            new { @class = "form-control", required = "required", @disabled = "disabled", type = "date" }
                        })
 
                 </div>
@@ -263,7 +263,7 @@
                     @Html.EditorFor(model => model.ApprovedDate, new
                        {
                            htmlAttributes =
-                            new { @class = "form-control", required = "required", @disabled = "disabled" }
+                            new { @class = "form-control", required = "required", @disabled = "disabled", type = "date" }
                        })
 
                 </div>
@@ -276,7 +276,7 @@
                     @Html.EditorFor(model => model.RejectedDate, new
                        {
                            htmlAttributes =
-                            new { @class = "form-control", required = "required", @disabled = "disabled" }
+                            new { @class = "form-control", required = "required", @disabled = "disabled", type = "date" }
                        })
 
                 </div>

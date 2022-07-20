@@ -161,10 +161,10 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text width-100" id="inputGroup-sizing-sm">Created Date</span>
                     </div>
-                    @Html.EditorFor(model => model.RefCode, new
+                    @Html.EditorFor(model => model.CreatedDate , new
                        {
                            htmlAttributes =
-                            new { @class = "form-control", required = "required", @disabled = "disabled" }
+                            new { @class = "form-control", required = "required", @disabled = "disabled",  type = "date" }
                        })
 
                 </div>
