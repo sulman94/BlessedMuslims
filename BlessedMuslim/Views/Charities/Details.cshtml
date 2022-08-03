@@ -161,7 +161,7 @@
                     @Html.EditorFor(model => model.AccountNumber, new
                {
                    htmlAttributes =
-                        new { @class = "form-control", @disabled = "disabled" }
+                        new { @class = "form-control", @disabled = "disabled", @maxlength = "8" }
                })
                 </div>
             </div>
@@ -173,7 +173,7 @@
                     @Html.EditorFor(model => model.SortCode, new
                {
                    htmlAttributes =
-                        new { @class = "form-control", @disabled = "disabled" }
+                        new { @class = "form-control", @disabled = "disabled", @pattern = "[0-9]{2}-[0-9]{2}-[0-9]{2}", @placeholder = "XX-XX-XX" }
                })
                 </div>
             </div>

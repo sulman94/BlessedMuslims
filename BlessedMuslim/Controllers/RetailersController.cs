@@ -30,6 +30,16 @@ namespace BlessedMuslim.Controllers
             return View();
         }
 
+        public async Task<ActionResult> RegisterRetailer()
+        {
+            var context = new BlessedMuslim_DBContext();
+
+            ViewBag.BusinessCategoryId = new SelectList(await context.BusinessCategories.Where(x => x.IsActive == true).Select(x => new { x.Id, Ldesc = x.Ldesc }).ToListAsync(), "Id", "Ldesc");
+            ViewBag.CityId = new SelectList(await context.Cities.Where(x => x.IsActive == true).Select(x => new { x.Id, CityName = x.CityName }).ToListAsync(), "Id", "CityName");
+            ViewBag.TermsAndConditions = await context.Config.Where(x => x.ConfigCode == "T&CRetailer").Select(x => x.ConfigValue).FirstOrDefaultAsync();
+            return View();
+        }
+
         [AllowAnonymous]
         public ActionResult Thankyou()
         {
