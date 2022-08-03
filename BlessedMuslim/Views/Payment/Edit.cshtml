@@ -63,7 +63,7 @@
             <div class="col-12 col-md-6">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Details</span>
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Payment Reference</span>
                     </div>
                     @Html.EditorFor(model => model.Details, new
                     {
@@ -95,6 +95,18 @@
                     {
                         htmlAttributes =
                         new { @class = "form-control", required = "required" }
+                    })
+                </div>
+            </div>
+            <div class="col-12 col-md-12">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Comments</span>
+                    </div>
+                    @Html.EditorFor(model => model.Comments, new
+                    {
+                        htmlAttributes =
+                        new { @class = "form-control" }
                     })
                 </div>
             </div>

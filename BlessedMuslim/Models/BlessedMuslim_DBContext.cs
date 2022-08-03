@@ -317,6 +317,10 @@ namespace BlessedMuslim.Models
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Comments)
+                .HasMaxLength(500)
+                .IsUnicode(false);
+
                 entity.Property(e => e.PaymentMode)
                     .HasMaxLength(50)
                     .IsUnicode(false);

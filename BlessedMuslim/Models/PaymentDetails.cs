@@ -9,6 +9,7 @@ namespace BlessedMuslim.Models
         public string TransactionNumber { get; set; }
         public long? RetailerId { get; set; }
         public string Details { get; set; }
+        public string Comments { get; set; }
         public string PaymentMode { get; set; }
         public string Attachment { get; set; }
         public string PaymentStatus { get; set; }

@@ -48,6 +48,7 @@ namespace BlessedMuslim.Controllers
                                         AmountDue = a.AmountDue,
                                         AmountPaid = a.AmountPaid,
                                         Details = a.Details,
+                                        Comments = a.Comments
                                     }).ToListAsync();
 
             return Json(new { data = dataPayments }, new Newtonsoft.Json.JsonSerializerSettings());

@@ -29,6 +29,8 @@ namespace BlessedMuslim.Models
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         [RegularExpression(@"^[A-Za-z0-9]+@([a-zA-Z]+\\.)+[a-zA-Z]{2,6}]&")]
         public string Email { get; set; }
+        //[Compare("Email")]
+        //public string ConfirmEmail { get; set; }
         public string Gender { get; set; }
         public string Phone1 { get; set; }
         public string Phone2 { get; set; }
