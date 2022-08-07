@@ -98,7 +98,7 @@
                     @Html.EditorFor(model => model.Dob, new
                {
                    htmlAttributes =
-                    new { @class = "form-control", required = "required", type = "date" }
+                    new { @class = "form-control", required = "required", type = "date", @Value = @Model.Dob.ToString("yyyy-MM-dd") }
                })
 
                 </div>
@@ -201,7 +201,7 @@
                     @Html.EditorFor(model => model.Phone2, new
                {
                    htmlAttributes =
-                    new { @class = "form-control numbers-only", required = "required" }
+                    new { @class = "form-control numbers-only" }
                })
 
                 </div>
@@ -309,7 +309,7 @@
                     @Html.EditorFor(model => model.Remarks, new
                {
                    htmlAttributes =
-                    new { @class = "form-control", required = "required" }
+                    new { @class = "form-control" }
                })
                 </div>
             </div>

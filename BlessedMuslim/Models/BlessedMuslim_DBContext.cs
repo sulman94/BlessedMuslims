@@ -254,8 +254,6 @@ namespace BlessedMuslim.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.RejectedBy).HasColumnType("datetime");
-
                 entity.Property(e => e.RejectedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Remarks)
