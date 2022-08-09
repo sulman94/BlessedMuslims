@@ -6,6 +6,23 @@
 @using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    @if (TempData["ApplicationFormErrorMsg"] != null)
+    {
+        <div class="mt-2">
+            <div class="alert alert-danger" role="alert">
+                @TempData["ApplicationFormErrorMsg"]
+            </div>
+        </div>
+    }
+
+    @if (TempData["ApplicationFormSuccessMsg"] != null)
+    {
+        <div class="mt-2">
+            <div class="alert alert-success" role="alert">
+                @TempData["ApplicationFormSuccessMsg"]
+            </div>
+        </div>
+    }
     <div class="form-horizontal">
         <h6>Edit Applicants</h6>
         <hr />
@@ -270,9 +287,9 @@
                     @Html.EditorFor(model => model.SubmitDate, new
                        {
                            htmlAttributes =
-                            new { @class = "form-control", required = "required", @disabled = "disabled" }
+                            new { @class = "form-control", required = "required" }
                        })
-
+                    @*, @disabled = "disabled"*@
                 </div>
             </div>
             <div class="col-12 col-md-6">
@@ -281,10 +298,10 @@
                         <span class="input-group-text width-100" id="inputGroup-sizing-sm">Approved Date</span>
                     </div>
                     @Html.EditorFor(model => model.ApprovedDate, new
-                       {
-                           htmlAttributes =
-                            new { @class = "form-control" }
-                       })
+               {
+                   htmlAttributes =
+                            new { @class = "form-control", type = "date" }
+               })
 
                 </div>
             </div>
@@ -296,7 +313,7 @@
                     @Html.EditorFor(model => model.RejectedDate, new
                        {
                            htmlAttributes =
-                            new { @class = "form-control" }
+                            new { @class = "form-control", type = "date" }
                        })
 
                 </div>

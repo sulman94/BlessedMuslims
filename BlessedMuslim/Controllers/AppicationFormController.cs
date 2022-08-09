@@ -172,7 +172,7 @@ namespace BlessedMuslim.Controllers
                     }
                     else
                     {
-                        TempData["ApplicationFormErrorMsg"] = "Han bhai apni pasand ka msg daal le.";
+                        TempData["ApplicationFormErrorMsg"] = "Approval Date is older than Submission Date";
                     }
                     
                 }
@@ -204,7 +204,7 @@ namespace BlessedMuslim.Controllers
                     }
                     else
                     {
-                        TempData["ApplicationFormErrorMsg"] = "Han bhai apni pasand ka msg daal le.";
+                        TempData["ApplicationFormErrorMsg"] = "Rejection Date is older than Submission Date";
                     }
                     
                 }
@@ -263,7 +263,17 @@ namespace BlessedMuslim.Controllers
         {
             try
             {
-                string userimg = "";
+                if (data.RejectedDate <= data.SubmitDate)
+                {
+                    TempData["ApplicationFormErrorMsg"] = "Rejection Date is older than Submission Date";
+                    return RedirectToAction("Edit");
+                }
+                if (data.ApprovedDate <= data.SubmitDate)
+                {
+                    TempData["ApplicationFormErrorMsg"] = "Approval Date is older than Submission Date";
+                    return RedirectToAction("Edit");
+                }
+                    string userimg = "";
                 string Doc = "";
                 if (files != null)
                 {
@@ -316,6 +326,7 @@ namespace BlessedMuslim.Controllers
                 dbEntry.Property("Idphoto").IsModified = true;
                 await context.SaveChangesAsync();
                 ViewBag.result = "Record Updated Successfully!";
+                TempData["ApplicationFormSuccessMsg"] = "Profile has been successfully Updated.";
             }
             catch (Exception e)
             {
