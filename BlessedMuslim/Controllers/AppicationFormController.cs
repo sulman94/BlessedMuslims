@@ -164,14 +164,23 @@ namespace BlessedMuslim.Controllers
                     dataApplication.RejectedBy = null;
                     dataApplication.RejectedDate = null;
                     dataApplication.ApprovedDate = DateTime.Now;
-                    context.Update(dataApplication);
-                    await context.SaveChangesAsync();
+                    if (dataApplication.ApprovedDate >= dataApplication.SubmitDate)
+                    {
+                        TempData["ApplicationFormSuccessMsg"] = "Profile has been successfully approved.";
+                        context.Update(dataApplication);
+                        await context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        TempData["ApplicationFormErrorMsg"] = "Han bhai apni pasand ka msg daal le.";
+                    }
+                    
                 }
             }
             catch (Exception e)
             {
                 var error = e;
-                ViewBag.error = e.Message;
+                TempData["ApplicationFormErrorMsg"]  = e.Message;
             }
             return RedirectToAction("Index");
         }
@@ -187,14 +196,23 @@ namespace BlessedMuslim.Controllers
                     dataApplication.ApprovedBy = null;
                     dataApplication.ApprovedDate = null;
                     dataApplication.RejectedDate = DateTime.Now;
-                    context.Update(dataApplication);
-                    await context.SaveChangesAsync();
+                    if (dataApplication.RejectedDate >= dataApplication.SubmitDate)
+                    {
+                        TempData["ApplicationFormSuccessMsg"] = "Profile has been successfully Rejected.";
+                        context.Update(dataApplication);
+                        await context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        TempData["ApplicationFormErrorMsg"] = "Han bhai apni pasand ka msg daal le.";
+                    }
+                    
                 }
             }
             catch (Exception e)
             {
                 var error = e;
-                ViewBag.error = e.Message;
+                TempData["ApplicationFormErrorMsg"] = e.Message;
             }
             return RedirectToAction("Index");
         }

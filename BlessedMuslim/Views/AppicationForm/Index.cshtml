@@ -5,6 +5,11 @@
 
 <script>
     $(document).ready(function () {
+
+        $(".alert").delay(4000).slideUp(200, function () {
+            $(this).alert('close');
+        });
+
         let userRole = "@String.Format(User.Claims.FirstOrDefault(x => x.Type.Contains("role")).Value)"
         var table = $('#example').DataTable({
             "ajax": "/AppicationForm/getApplications",
@@ -74,6 +79,24 @@
     @*<div class="m-2 float-right">
             <input type="button" class="btn btn-dark" value="Add New" onclick="location.href='@Url.Action("Add", "AppicationForm")'" />
         </div>*@
+    @if (TempData["ApplicationFormErrorMsg"] != null)
+    {
+        <div class="mt-2">
+            <div class="alert alert-danger" role="alert">
+                @TempData["ApplicationFormErrorMsg"]
+            </div>
+        </div>
+    }
+
+    @if (TempData["ApplicationFormSuccessMsg"] != null)
+    {
+        <div class="mt-2">
+            <div class="alert alert-success" role="alert">
+                @TempData["ApplicationFormSuccessMsg"]
+            </div>
+        </div>
+    }
+
     <h6>List of Applicants</h6>
     <hr />
     <table id="example" class="display" style="width:100%">
