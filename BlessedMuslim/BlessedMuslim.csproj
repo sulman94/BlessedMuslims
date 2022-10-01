@@ -41,7 +41,7 @@
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="Views\AppicationForm\Index.cshtml">
+    <Content Update="Views\ApplicationForm\Index.cshtml">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Update="Views\Areas\Index.cshtml">

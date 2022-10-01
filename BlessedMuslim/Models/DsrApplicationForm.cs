@@ -25,13 +25,20 @@ namespace BlessedMuslim.Models
             }
         }
         public long Id { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string FirstName { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string LastName { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Dob { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string PostCode { get; set; }
+        [Required]
+        [MinLength(11)]
+        [MaxLength(20)]
         public string ContactNumber { get; set; }
         public int? AreaId { get; set; }
         public bool TermsAgreement { get; set; }

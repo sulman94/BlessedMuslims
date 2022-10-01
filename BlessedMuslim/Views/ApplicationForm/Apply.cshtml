@@ -2,7 +2,7 @@
 
 @{
     Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
-    ViewData["Title"] = "Appication Form";
+    ViewData["Title"] = "Application Form";
 }
 
 <div class="row">
@@ -18,18 +18,18 @@
             <div class="col-12 col-md-6">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">User Image</span>
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Upload Photo</span>
                     </div>
-                    <input type="file" title="Upload User Image" name="files" onchange="show(this,'user_img')" accept="image/*" />
+                    <input type="file" title="Upload Photo" name="files" onchange="show(this,'user_img')" accept="image/*" />
 
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Document</span>
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Upload ID</span>
                     </div>
-                    <input type="file" title="Upload Documents" name="Documents" onchange="show(this,'user_Doc')" accept="image/*" />
+                    <input type="file" title="Upload ID" name="Documents" onchange="show(this,'user_Doc')" accept="image/*" />
 
                 </div>
             </div>
@@ -50,9 +50,9 @@
                     @Html.EditorFor(model => model.FirstName, new
                {
                    htmlAttributes =
-                    new { @class = "form-control alphabets-only", required = "required" }
+                    new { @class = "form-control alphabets-only", required = "required", maxlength = 50 }
                })
-
+               @Html.ValidationMessageFor(model=>model.FirstName)
                 </div>
             </div>
             <div class="col-12 col-md-6">
@@ -63,9 +63,9 @@
                     @Html.EditorFor(model => model.LastName, new
                {
                    htmlAttributes =
-                    new { @class = "form-control alphabets-only", required = "required" }
+                    new { @class = "form-control alphabets-only", required = "required", maxlength = 50 }
                })
-
+                @Html.ValidationMessageFor(model=>model.LastName)
                 </div>
             </div>
             <div class="col-12 col-md-6">
@@ -103,8 +103,10 @@
                     @Html.EditorFor(model => model.ContactNumber, new
                {
                    htmlAttributes =
-                    new { @class = "form-control numbers-only", required = "required" }
+                    new { @class = "form-control numbers-only", required = "required", minlength = 11, maxlength = 20 }
                })
+                @Html.ValidationMessageFor(model=>model.ContactNumber)
+
                 </div>
             </div>
             <div class="col-12 col-md-6">
@@ -281,6 +283,12 @@
         }
     }
 
+//document.ready(){
+//    const regex = "^0+[0-9]+";
+//    $("#ContactNumber").on("change", function() {
+//        return this.match(regex);
+//    });
+//}
     //function confirmEmail() {
     //    var email = document.getElementById("Email").value
     //    var confemail = document.getElementById("ConfirmEmail").value

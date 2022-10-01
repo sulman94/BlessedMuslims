@@ -14,10 +14,10 @@ using System.Threading.Tasks;
 namespace BlessedMuslim.Controllers
 {
     [Authorize(Roles = "Admin,Manager")]
-    public class AppicationFormController : Controller
+    public class ApplicationFormController : Controller
     {
         private IHostingEnvironment _environment;
-        public AppicationFormController(IHostingEnvironment environment)
+        public ApplicationFormController(IHostingEnvironment environment)
         {
             _environment = environment;
         }
