@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace BlessedMuslim.Models
 {
     public partial class Retailers
     {
-        public Retailers()
-        {
-            PaymentDetails = new HashSet<PaymentDetails>();
-        }
-
         public long Id { get; set; }
         public string BusinessName { get; set; }
         public int? BusinessCategoryId { get; set; }
@@ -18,9 +12,6 @@ namespace BlessedMuslim.Models
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string PostCode { get; set; }
-        [Required(ErrorMessage = "The email address is required")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
-        [RegularExpression(@"^[A-Za-z0-9]+@([a-zA-Z]+\\.)+[a-zA-Z]{2,6}]&")]
         public string Email { get; set; }
         public string ContactPerson { get; set; }
         public string ShopPhone { get; set; }
@@ -38,6 +29,5 @@ namespace BlessedMuslim.Models
 
         public virtual Cities CityCodeNavigation { get; set; }
         public virtual Users RegByNavigation { get; set; }
-        public virtual ICollection<PaymentDetails> PaymentDetails { get; set; }
     }
 }

@@ -274,6 +274,17 @@
 </div>
 }
 
+<style>
+    .ui-autocomplete {
+        max-height: 200px;
+        overflow-y: auto;
+        /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+        /* add padding to account for vertical scrollbar */
+        padding-right: 20px;
+    }
+</style>
+
 <script type="text/javascript">
     function show(input, id) {
         var fileTypes = ["Jpg", "png", "jpg", "jpeg", "PNG"];
@@ -301,7 +312,28 @@
         else {
             alert('Please read and agree terms and conditions!');
         }
-    }
+        }
+
+    $("#PostCode").autocomplete({  
+           source: function(request,response) {  
+               $.ajax({  
+                   url: "/ApplicationForm/SearchPostalCode",  
+                   type: "POST",  
+                   dataType: "json",  
+                   data: { Prefix: request.term },  
+                   success: function (data) {  
+                       debugger;
+                       response($.map(data, function (item) {
+                           return { label: item.text, value: item.value };  
+                       }))  
+  
+                   }  
+               })  
+           },  
+           messages: {  
+               noResults: "", results: ""  
+           }  
+       });
 
 //document.ready(){
 //    const regex = "^0+[0-9]+";

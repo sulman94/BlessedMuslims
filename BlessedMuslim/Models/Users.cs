@@ -8,7 +8,6 @@ namespace BlessedMuslim.Models
         public Users()
         {
             DsrApplicationForm = new HashSet<DsrApplicationForm>();
-            PaymentDetails = new HashSet<PaymentDetails>();
             Retailers = new HashSet<Retailers>();
         }
 
@@ -26,7 +25,6 @@ namespace BlessedMuslim.Models
 
         public virtual Role Role { get; set; }
         public virtual ICollection<DsrApplicationForm> DsrApplicationForm { get; set; }
-        public virtual ICollection<PaymentDetails> PaymentDetails { get; set; }
         public virtual ICollection<Retailers> Retailers { get; set; }
     }
 }

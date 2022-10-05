@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace BlessedMuslim.Models
 {
@@ -19,8 +18,6 @@ namespace BlessedMuslim.Models
         public DateTime? JoiningDate { get; set; }
         public string BankName { get; set; }
         public string AccountNumber { get; set; }
-        //[RegularExpression("^[0-9]{2}-[-|]-[0-9]{2}-[-|]-[0-9]{2}")]
-        //[RegularExpression("^[0-9]{2}-[0-9]{2}-[0-9]{2}$", ErrorMessage = "Sort Code must follow the XX-XX-XX format!")]
         public string SortCode { get; set; }
         public bool? IsActive { get; set; }
     }

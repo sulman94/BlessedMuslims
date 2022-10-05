@@ -358,5 +358,15 @@ namespace BlessedMuslim.Controllers
                 }
             }
         }
+
+        [HttpPost]
+        public async Task<JsonResult> SearchPostalCode(string Prefix)
+        {
+            var context = new db_a8b5a4_blessedmuslimdbContext();
+
+            SelectList lstPostalCodes = new SelectList(await context.UkPostalCodes.Where(x => x.AreaName.Contains(Prefix)).Select(x => new { x.PostCode, PostalCode = x.AreaName + ", " + x.PostCode }).ToListAsync(), "PostCode", "PostalCode");
+
+            return Json(lstPostalCodes);
+        }
     }
 }
