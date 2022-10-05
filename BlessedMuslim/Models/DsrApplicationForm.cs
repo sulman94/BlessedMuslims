@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlessedMuslim.Models
 {
@@ -12,6 +13,8 @@ namespace BlessedMuslim.Models
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string PostCode { get; set; }
+        [RegularExpression(@"^0[0-9]",
+         ErrorMessage = "Number Start with Zero and contains only Numbers")]
         public string ContactNumber { get; set; }
         public int? AreaId { get; set; }
         public bool TermsAgreement { get; set; }

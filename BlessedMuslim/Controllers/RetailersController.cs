@@ -151,6 +151,7 @@ namespace BlessedMuslim.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<JsonResult> SearchPostalCode(string Prefix)
         {
             var context = new db_a8b5a4_blessedmuslimdbContext();

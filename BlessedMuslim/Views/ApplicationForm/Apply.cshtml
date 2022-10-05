@@ -94,6 +94,7 @@
            })
 
             </div>
+            <span id="DateOfBirthVal" class="text-danger">Please enter Date Of Birth.</span>
         </div>
         <div class="col-12 col-md-6">
             <div class="input-group input-group-sm mb-3">
@@ -124,6 +125,19 @@
                     <span class="input-group-text width-100" id="inputGroup-sizing-sm">Email</span>
                 </div>
                 @Html.EditorFor(model => model.Email, new
+           {
+               htmlAttributes =
+                new { @class = "form-control", required = "required" }
+           })
+
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">Post Code</span>
+                </div>
+                @Html.EditorFor(model => model.PostCode, new
            {
                htmlAttributes =
                 new { @class = "form-control", required = "required" }
@@ -171,19 +185,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-6">
-            <div class="input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">Post Code</span>
-                </div>
-                @Html.EditorFor(model => model.PostCode, new
-           {
-               htmlAttributes =
-                new { @class = "form-control", required = "required" }
-           })
-
-            </div>
-        </div>
+        
 
         <div class="col-12 col-md-6">
         </div>
@@ -284,7 +286,7 @@
         padding-right: 20px;
     }
 </style>
-
+<script src="~/js/DateOfBirthValidation.js" type="text/javascript"></script>
 <script type="text/javascript">
     function show(input, id) {
         var fileTypes = ["Jpg", "png", "jpg", "jpeg", "PNG"];
@@ -306,14 +308,24 @@
 
     function submitForm() {
         debugger;
-        if ($('#TermsAgreement').prop("checked")) {
-            $('#applyForm').submit();
+
+       let text = $('#ContactNumber').val();
+            let pattern = /^0[0-9]/;
+            let result = text.match(pattern);
+
+        if (result!= null && ('#TermsAgreement').prop("checked")) {
+            if (!ValidateDateOfBirth(val)) {
+                $('#DateOfBirthVal').text("Please select age above 18 Years");
+                $('#DateOfBirthVal').show();
+            } else {
+                $('#applyForm').submit();
+            }
         }
         else {
             alert('Please read and agree terms and conditions!');
         }
         }
-
+    $('#DateOfBirthVal').hide();
     $("#PostCode").autocomplete({  
            source: function(request,response) {  
                $.ajax({  
@@ -334,6 +346,23 @@
                noResults: "", results: ""  
            }  
        });
+
+       $('#Dob').change(function () {
+        debugger
+            
+        var val = $(this).val();
+        if (val == '') {
+            $('#DateOfBirthVal').show();
+
+        } else {
+            if (!ValidateDateOfBirth(val)) {
+                $('#DateOfBirthVal').text("Please select age above 18 Years");
+                $('#DateOfBirthVal').show();
+            } else {
+                $('#DateOfBirthVal').hide();
+            }
+        }
+    });
 
 //document.ready(){
 //    const regex = "^0+[0-9]+";

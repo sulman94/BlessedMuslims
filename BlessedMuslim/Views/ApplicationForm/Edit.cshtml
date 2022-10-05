@@ -3,7 +3,7 @@
     ViewData["Title"] = "Applicants";
 }
 
-@using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data", id = "applyEditForm" }))
 {
     @Html.AntiForgeryToken()
     @if (TempData["ApplicationFormErrorMsg"] != null)
@@ -337,7 +337,8 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-dark" />
+                    <input type="button" value="Save" class="btn btn-outline-danger" onclick="submitForm()"/>
+                    @*<input type="submit" value="Save" class="btn btn-dark" />*@
                 </div>
             </div>
         </div>
@@ -362,7 +363,16 @@
 
     </div>
 }
-
+<style>
+    .ui-autocomplete {
+        max-height: 200px;
+        overflow-y: auto;
+        /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+        /* add padding to account for vertical scrollbar */
+        padding-right: 20px;
+    }
+</style>
 <script type="text/javascript">
     function show(input, id) {
         var fileTypes = ["Jpg", "png", "jpg", "jpeg", "PNG"];
@@ -382,4 +392,41 @@
 
         }
     }
+
+    
+function submitForm() {
+    debugger;
+
+    let text = $('#ContactNumber').val();
+    let pattern = /^0[0-9]/;
+    let result = text.match(pattern);
+
+    if (result != null) {
+        $('#applyEditForm').submit();
+    }
+    else {
+        alert('Please correct Contact Number');
+    }
+}
+
+    $("#PostCode").autocomplete({  
+           source: function(request,response) {  
+               $.ajax({  
+                   url: "/ApplicationForm/SearchPostalCode",  
+                   type: "POST",  
+                   dataType: "json",  
+                   data: { Prefix: request.term },  
+                   success: function (data) {  
+                       debugger;
+                       response($.map(data, function (item) {
+                           return { label: item.text, value: item.value };  
+                       }))  
+  
+                   }  
+               })  
+           },  
+           messages: {  
+               noResults: "", results: ""  
+           }  
+       });
 </script>
