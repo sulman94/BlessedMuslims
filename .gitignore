@@ -348,3 +348,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/CSV data
+/BLESSEDMUSLIMSDB02102022.sql
+/BlessedMuslim/wwwroot/Documents

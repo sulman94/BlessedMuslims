@@ -8,7 +8,7 @@
 <div class="row">
     <h2 class="m-auto">Retailer Registration Form</h2>
 </div>
-@using (Html.BeginForm())
+@using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data", id = "registerForm" }))
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
@@ -168,35 +168,9 @@
 
                 </div>
             </div>
-
-            <div class="col-12 col-md-5">
-                <div class="input-group input-group-sm mb-3">
-                    @*<div class="input-group-prepend">
-                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">Area</span>
-                </div>*@
-                    <h3>Terms &amp; Conditions</h3>
-                    @ViewBag.TermsAndConditions
-
-                    @*@Html.DropDownListFor(model => model.AreaId, (IEnumerable<SelectListItem>)ViewBag.AreaId, "--- Select Your Area ---", new { @class = "form-control", required = "required" })*@
-
-                </div>
-            </div>
-
             <div class="col-12 col-md-12">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text " id="inputGroup-sizing-sm">
-                            @Html.CheckBoxFor(model => model.TermsAgreement, new
-                  {
-                      htmlAttributes =
-                       new { @class = "form-control", required = "required" }
-                  })
-                        </span>I have read the terms and conditions and fully understood, I agree to the terms and condition to work as
-                        a commition based seles representative for Blessed Muslim UK Ltd.
-                    </div>
+                <a href="#" data-toggle="modal" data-target="#myModal">Terms &amp; Conditions</a>
 
-
-                </div>
             </div>
 
             <div class="col-12 col-md-12">
@@ -215,7 +189,7 @@
 
             <div class="form-group float-left">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Submit Application" class="btn btn-outline-danger" />
+                    <input type="button" value="Submit Application" class="btn btn-outline-danger" onclick="submitForm()"/>
                 </div>
             </div>
         </div>
@@ -239,7 +213,52 @@
             </div>
         }
 
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Terms &amp; Conditions</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div>@ViewBag.TermsAndConditions</div>
+                        <br />
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text " id="inputGroup-sizing-sm">
+                                    @Html.CheckBoxFor(model => model.TermsAgreement, new
+                          {
+                              htmlAttributes =
+                               new { @class = "form-control", required = "required" }
+                          })
+                                </span>I have read the terms and conditions and fully understood, I agree to the terms and condition to work as
+                                a commition based seles representative for Blessed Muslim UK Ltd.
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 }
 
-
+<script type="text/javascript">
+    function submitForm() {
+        debugger;
+        if ($('#TermsAgreement').prop("checked")) {
+            $('#registerForm').submit();
+        }
+        else {
+            alert('Please read and agree terms and conditions!');
+        }
+    }
+</script>

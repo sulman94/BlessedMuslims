@@ -8,130 +8,130 @@
 <div class="row">
     <h2 class="m-auto">Sales Representative Application Form</h2>
 </div>
-@using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data",id = "applyForm"  }))
 {
     @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        <br />
-        <div class="row">
+<div class="form-horizontal">
+    <br />
+    <div class="row">
 
-            <div class="col-12 col-md-6">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Upload Photo</span>
-                    </div>
-                    <input type="file" title="Upload Photo" name="files" onchange="show(this,'user_img')" accept="image/*" />
-
-                </div>
-            </div>
-            <div class="col-12 col-md-6">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Upload ID</span>
-                    </div>
-                    <input type="file" title="Upload ID" name="Documents" onchange="show(this,'user_Doc')" accept="image/*" />
-
-                </div>
-            </div>
-
-            @*<div class="col-12 col-md-1">
+        <div class="col-12 col-md-6">
             <div class="input-group input-group-sm mb-3">
-                <a id="AddNewVehicle" class="btn btn-dark" style="color: #ffc107">
-                    <i class="fa fa-plus"></i>
-                </a>
-            </div>
-        </div>*@
-
-            <div class="col-12 col-md-6">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">First Name</span>
-                    </div>
-                    @Html.EditorFor(model => model.FirstName, new
-               {
-                   htmlAttributes =
-                    new { @class = "form-control alphabets-only", required = "required", maxlength = 50 }
-               })
-               @Html.ValidationMessageFor(model=>model.FirstName)
+                <div class="input-group-prepend">
+                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">Upload Photo</span>
                 </div>
+                <input type="file" title="Upload Photo" name="files" onchange="show(this,'user_img')" accept="image/*" />
+
             </div>
-            <div class="col-12 col-md-6">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Last Name</span>
-                    </div>
-                    @Html.EditorFor(model => model.LastName, new
-               {
-                   htmlAttributes =
-                    new { @class = "form-control alphabets-only", required = "required", maxlength = 50 }
-               })
-                @Html.ValidationMessageFor(model=>model.LastName)
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">Upload ID</span>
                 </div>
+                <input type="file" title="Upload ID" name="Documents" onchange="show(this,'user_Doc')" accept="image/*" />
+
             </div>
-            <div class="col-12 col-md-6">
+        </div>
+
+        @*<div class="col-12 col-md-1">
                 <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Gender</span>
-                    </div>
-
-                    @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>{
-        new SelectListItem{ Text="Male", Value="Male"},
-        new SelectListItem{ Text="Female", Value="Female"}
-        }, "--- Select Gender ---", new { @class = "form-control", required = "required" })
-
+                    <a id="AddNewVehicle" class="btn btn-dark" style="color: #ffc107">
+                        <i class="fa fa-plus"></i>
+                    </a>
                 </div>
-            </div>
+            </div>*@
 
-            <div class="col-12 col-md-6">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Date Of Birth</span>
-                    </div>
-                    @Html.EditorFor(model => model.Dob, new
-               {
-                   htmlAttributes =
-                    new { @class = "form-control", required = "required", type = "date" }
-               })
-
+        <div class="col-12 col-md-6">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">First Name</span>
                 </div>
+                @Html.EditorFor(model => model.FirstName, new
+           {
+               htmlAttributes =
+                new { @class = "form-control alphabets-only", required = "required", maxlength = 50 }
+           })
+                @Html.ValidationMessageFor(model => model.FirstName)
             </div>
-            <div class="col-12 col-md-6">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Contact Number</span>
-                    </div>
-                    @Html.EditorFor(model => model.ContactNumber, new
-               {
-                   htmlAttributes =
-                    new { @class = "form-control numbers-only", required = "required", minlength = 11, maxlength = 20 }
-               })
-                @Html.ValidationMessageFor(model=>model.ContactNumber)
-
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">Last Name</span>
                 </div>
+                @Html.EditorFor(model => model.LastName, new
+           {
+               htmlAttributes =
+                new { @class = "form-control alphabets-only", required = "required", maxlength = 50 }
+           })
+                @Html.ValidationMessageFor(model => model.LastName)
             </div>
-            <div class="col-12 col-md-6">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Interested Area</span>
-                    </div>
-                    @Html.DropDownListFor(model => model.AreaId, (IEnumerable<SelectListItem>)ViewBag.AreaId, "--- Select Your Area ---", new { @class = "form-control", required = "required" })
-
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">Gender</span>
                 </div>
-            </div>
-            <div class="col-12 col-md-6">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Email</span>
-                    </div>
-                    @Html.EditorFor(model => model.Email, new
-               {
-                   htmlAttributes =
-                    new { @class = "form-control", required = "required" }
-               })
 
-                </div>
+                @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>{
+    new SelectListItem{ Text="Male", Value="Male"},
+    new SelectListItem{ Text="Female", Value="Female"}
+    }, "--- Select Gender ---", new { @class = "form-control", required = "required" })
+
             </div>
-            @*<div class="col-12 col-md-6">
+        </div>
+
+        <div class="col-12 col-md-6">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">Date Of Birth</span>
+                </div>
+                @Html.EditorFor(model => model.Dob, new
+           {
+               htmlAttributes =
+                new { @class = "form-control", required = "required", type = "date" }
+           })
+
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">Contact Number</span>
+                </div>
+                @Html.EditorFor(model => model.ContactNumber, new
+           {
+               htmlAttributes =
+                new { @class = "form-control numbers-only", required = "required", minlength = 11, maxlength = 20 }
+           })
+                @Html.ValidationMessageFor(model => model.ContactNumber)
+
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">Interested Area</span>
+                </div>
+                @Html.DropDownListFor(model => model.AreaId, (IEnumerable<SelectListItem>)ViewBag.AreaId, "--- Select Your Area ---", new { @class = "form-control", required = "required" })
+
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">Email</span>
+                </div>
+                @Html.EditorFor(model => model.Email, new
+           {
+               htmlAttributes =
+                new { @class = "form-control", required = "required" }
+           })
+
+            </div>
+        </div>
+        @*<div class="col-12 col-md-6">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text width-100" id="inputGroup-sizing-sm">Confirm Email</span>
@@ -144,124 +144,134 @@
                 </div>
             </div>*@
 
-            <div class="col-12 col-md-12">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Address Line 1</span>
-                    </div>
-                    @Html.EditorFor(model => model.AddressLine1, new
-               {
-                   htmlAttributes =
-                    new { @class = "form-control", required = "required" }
-               })
+        <div class="col-12 col-md-12">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">Address Line 1</span>
+                </div>
+                @Html.EditorFor(model => model.AddressLine1, new
+           {
+               htmlAttributes =
+                new { @class = "form-control", required = "required" }
+           })
 
+            </div>
+        </div>
+        <div class="col-12 col-md-12">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">Address Line 2</span>
+                </div>
+                @Html.EditorFor(model => model.AddressLine2, new
+           {
+               htmlAttributes =
+                new { @class = "form-control", required = "required" }
+           })
+
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">Post Code</span>
+                </div>
+                @Html.EditorFor(model => model.PostCode, new
+           {
+               htmlAttributes =
+                new { @class = "form-control", required = "required" }
+           })
+
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+        </div>
+
+        <div class="col-12 col-md-12">
+            <a href="#" data-toggle="modal" data-target="#myModal">Terms &amp; Conditions</a>
+
+        </div>
+
+        
+
+        <div class="col-12 col-md-12">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend" style="color: chocolate">
+                    <i>
+                        Once the application is submitted, sales rep. should receive a confirmation message and area manger should
+                        also receive his application reference number so he can call him and set a meeting for interview. Only area
+                        manager will decide if the applicant is suitable for the job.
+                    </i>
                 </div>
             </div>
-            <div class="col-12 col-md-12">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Address Line 2</span>
-                    </div>
-                    @Html.EditorFor(model => model.AddressLine2, new
-               {
-                   htmlAttributes =
-                    new { @class = "form-control", required = "required" }
-               })
+        </div>
 
+    </div>
+
+    <div class="row">
+
+        <div class="form-group float-left">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Submit Application" class="btn btn-outline-danger" onclick="submitForm()"/>
+            </div>
+        </div>
+    </div>
+
+
+    @if (!string.IsNullOrEmpty(ViewBag.error))
+    {
+        <div class="mt-2">
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.error
+            </div>
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.result))
+    {
+        <div class="mt-2">
+            <div class="alert alert-success" role="alert">
+                @ViewBag.result
+            </div>
+        </div>
+    }
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Terms &amp; Conditions</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-            </div>
-
-            <div class="col-12 col-md-6">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Post Code</span>
+                <div class="modal-body">
+                    <div>@ViewBag.TermsAndConditions</div>
+                    <br />
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text " id="inputGroup-sizing-sm">
+                                @Html.CheckBoxFor(model => model.TermsAgreement, new
+                      {
+                          htmlAttributes =
+                           new { @class = "form-control", required = "required" }
+                      })
+                            </span>I have read the terms and conditions and fully understood, I agree to the terms and condition to work as
+                            a commition based seles representative for Blessed Muslim UK Ltd.
+                        </div>
                     </div>
-                    @Html.EditorFor(model => model.PostCode, new
-               {
-                   htmlAttributes =
-                    new { @class = "form-control", required = "required" }
-               })
-
                 </div>
-            </div>
-
-            <div class="col-12 col-md-6">
-            </div>
-
-
-            <div class="col-12 col-md-5">
-                <div class="input-group input-group-sm mb-3">
-                    @*<div class="input-group-prepend">
-                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">Area</span>
-                </div>*@
-                    <h3>Terms &amp; Conditions</h3>
-                    @ViewBag.TermsAndConditions
-
-                    @*@Html.DropDownListFor(model => model.AreaId, (IEnumerable<SelectListItem>)ViewBag.AreaId, "--- Select Your Area ---", new { @class = "form-control", required = "required" })*@
-
-                </div>
-            </div>
-
-            <div class="col-12 col-md-12">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text " id="inputGroup-sizing-sm">
-                            @Html.CheckBoxFor(model => model.TermsAgreement, new
-                  {
-                      htmlAttributes =
-                       new { @class = "form-control", required = "required" }
-                  })
-                        </span>I have read the terms and conditions and fully understood, I agree to the terms and condition to work as
-                        a commition based seles representative for Blessed Muslim UK Ltd.
-                    </div>
-
-
-                </div>
-            </div>
-
-            <div class="col-12 col-md-12">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend" style="color: chocolate">
-                        <i>
-                            Once the application is submitted, sales rep. should receive a confirmation message and area manger should
-                            also receive his application reference number so he can call him and set a meeting for interview. Only area
-                            manager will decide if the applicant is suitable for the job.
-                        </i>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
 
         </div>
+    </div>
 
-            <div class="row">
-
-                <div class="form-group float-left">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Submit Application" class="btn btn-outline-danger" />
-                    </div>
-                </div>
-            </div>
-
-
-            @if (!string.IsNullOrEmpty(ViewBag.error))
-            {
-                <div class="mt-2">
-                    <div class="alert alert-danger" role="alert">
-                        @ViewBag.error
-                    </div>
-                </div>
-            }
-
-            @if (!string.IsNullOrEmpty(ViewBag.result))
-            {
-                <div class="mt-2">
-                    <div class="alert alert-success" role="alert">
-                        @ViewBag.result
-                    </div>
-                </div>
-            }
-
-        </div>
+</div>
 }
 
 <script type="text/javascript">
@@ -280,6 +290,16 @@
             else {
                 alert("Please select Image in this Format (Jpg,png,jpeg)");
             }
+        }
+        }
+
+    function submitForm() {
+        debugger;
+        if ($('#TermsAgreement').prop("checked")) {
+            $('#applyForm').submit();
+        }
+        else {
+            alert('Please read and agree terms and conditions!');
         }
     }
 
