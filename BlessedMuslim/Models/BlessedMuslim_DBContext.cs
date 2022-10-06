@@ -111,6 +111,11 @@ namespace BlessedMuslim.Models
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
+                entity.Property(e => e.CharityNumber)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.CharityId)
                     .IsRequired()
                     .HasColumnName("CharityID")

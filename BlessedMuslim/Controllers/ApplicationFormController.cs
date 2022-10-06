@@ -28,8 +28,7 @@ namespace BlessedMuslim.Controllers
         public async Task<ActionResult> Apply()
         {
             var context = new BlessedMuslim_DBContext();
-
-            ViewBag.AreaId = new SelectList(await context.Areas.Where(x=>x.IsActive == true).Select(x=>new {x.Id, AreaName = x.AreaName}).ToListAsync(), "Id", "AreaName");
+            ViewBag.AreaId = new SelectList(await context.Areas.Where(x=>x.IsActive == true).Select(x=>new {x.Id, AreaName = x.AreaName + ", " + x.AreaCode }).ToListAsync(), "Id", "AreaName");
             ViewBag.TermsAndConditions = await context.Config.Where(x=>x.ConfigCode == "T&C").Select(x=>x.ConfigValue).FirstOrDefaultAsync();
             return View();
         }
@@ -253,7 +252,7 @@ namespace BlessedMuslim.Controllers
 
         public async Task<IActionResult> Edit(int Id)
         {
-            ViewBag.AreaId = new SelectList(await context.Areas.Where(x => x.IsActive == true).Select(x => new { x.Id, AreaName = x.AreaName }).ToListAsync(), "Id", "AreaName");
+            ViewBag.AreaId = new SelectList(await context.Areas.Where(x => x.IsActive == true).Select(x => new { x.Id, AreaName = x.AreaName + ", " + x.AreaCode }).ToListAsync(), "Id", "AreaName");
             var std = await context.DsrApplicationForm.Where(s => s.Id == Id).FirstOrDefaultAsync();
             return View(std);
         }
@@ -273,7 +272,7 @@ namespace BlessedMuslim.Controllers
                     TempData["ApplicationFormErrorMsg"] = "Approval Date is older than Submission Date";
                     return RedirectToAction("Edit");
                 }
-                    string userimg = "";
+                string userimg = "";
                 string Doc = "";
                 if (files != null)
                 {
@@ -364,10 +363,17 @@ namespace BlessedMuslim.Controllers
         public async Task<JsonResult> SearchPostalCode(string Prefix)
         {
             var context = new db_a8b5a4_blessedmuslimdbContext();
-
-            SelectList lstPostalCodes = new SelectList(await context.UkPostalCodes.Where(x => x.AreaName.Contains(Prefix)).Select(x => new { x.PostCode, PostalCode = x.AreaName + ", " + x.PostCode }).ToListAsync(), "PostCode", "PostalCode");
-
+            SelectList lstPostalCodes = new SelectList(await context.UkPostalCodes.Where(x => x.AreaName.Contains(Prefix)).Select(x => new { x.PostCode, PostalCode = x.AreaName + ", " + x.PostCode }).Take(30).ToListAsync(), "PostCode", "PostalCode");
             return Json(lstPostalCodes);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<JsonResult> SearchAreas(string Prefix)
+        {
+            var context = new db_a8b5a4_blessedmuslimdbContext();
+            SelectList lstAreas = new SelectList(await context.Areas.Where(x => x.AreaName.Contains(Prefix)).Select(x => new { x.AreaCode, PostalCode = x.AreaName + ", " + x.AreaCode }).Take(30).ToListAsync(), "AreaCode", "AreaName");
+            return Json(lstAreas);
         }
     }
 }

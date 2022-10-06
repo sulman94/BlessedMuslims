@@ -318,7 +318,7 @@
 
                 </div>
             </div>
-            <div class="col-12 col-md-12">
+           @* <div class="col-12 col-md-12">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text width-100" id="inputGroup-sizing-sm">Remarks</span>
@@ -329,8 +329,18 @@
                     new { @class = "form-control" }
                })
                 </div>
-            </div>
+            </div>*@
+             <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Remarks</span>
+                    </div>
+                    @Html.TextAreaFor(model => model.Remarks,
+               
+                    new { @class = "form-control", style = "width:70% !important;", rows="3" })
 
+                </div>
+            </div>
         </div>
 
         <div class="row">

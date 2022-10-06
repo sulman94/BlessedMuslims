@@ -24,9 +24,15 @@ namespace BlessedMuslim.Controllers
         [HttpGet]
         public async Task<IActionResult> getCharities()
         {
-            var dataCountries = await context.Charity.Where(c => c.IsActive == true).ToListAsync();
-            dataCountries = dataCountries.OrderByDescending(x => x.Id).ToList();
-            return Json(new { data = dataCountries }, new Newtonsoft.Json.JsonSerializerSettings());
+            try
+            {
+                var dataCountries = await context.Charity.Where(c => c.IsActive == true).ToListAsync();
+                dataCountries = dataCountries.OrderByDescending(x => x.Id).ToList();
+                return Json(new { data = dataCountries }, new Newtonsoft.Json.JsonSerializerSettings());
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         public IActionResult Add()
@@ -91,6 +97,7 @@ namespace BlessedMuslim.Controllers
                 dbEntry.Property("JoiningDate").IsModified = true;
                 dbEntry.Property("BankName").IsModified = true;
                 dbEntry.Property("AccountNumber").IsModified = true;
+                dbEntry.Property("CharityNumber").IsModified = true;
                 dbEntry.Property("SortCode").IsModified = true;
                 await context.SaveChangesAsync();
                 ViewBag.result = "Record Updated Successfully!";

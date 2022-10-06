@@ -110,15 +110,27 @@
 
             </div>
         </div>
+        @* <div class="col-12 col-md-6">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text width-100" id="inputGroup-sizing-sm">Interested Area</span>
+                </div>
+                @Html.EditorFor(model => model.AreaCode, new
+           {
+               htmlAttributes =
+                new { @class = "form-control", required = "required" }
+           })
+
+            </div>
+        </div>*@
         <div class="col-12 col-md-6">
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text width-100" id="inputGroup-sizing-sm">Interested Area</span>
                 </div>
                 @Html.DropDownListFor(model => model.AreaId, (IEnumerable<SelectListItem>)ViewBag.AreaId, "--- Select Your Area ---", new { @class = "form-control", required = "required" })
-
             </div>
-        </div>
+       </div>
         <div class="col-12 col-md-6">
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
@@ -288,81 +300,103 @@
 </style>
 <script src="~/js/DateOfBirthValidation.js" type="text/javascript"></script>
 <script type="text/javascript">
-    function show(input, id) {
-        var fileTypes = ["Jpg", "png", "jpg", "jpeg", "PNG"];
-        if (input.files && input.files[0]) {
-            var filerdr = new FileReader();
-            var extension = input.files[0].name.split('.').pop().toLowerCase();
-            var isSuccess = fileTypes.indexOf(extension) > -1;
-            if (isSuccess) {
-                filerdr.onload = function (e) {
-                    $('#' + id).attr('src', e.target.result);
-                }
-                filerdr.readAsDataURL(input.files[0]);
-            }
-            else {
-                alert("Please select Image in this Format (Jpg,png,jpeg)");
-            }
-        }
-        }
 
-    function submitForm() {
-        debugger;
-
-       let text = $('#ContactNumber').val();
-            let pattern = /^0[0-9]/;
-            let result = text.match(pattern);
-
-        if (result!= null && ('#TermsAgreement').prop("checked")) {
-            if (!ValidateDateOfBirth(val)) {
-                $('#DateOfBirthVal').text("Please select age above 18 Years");
-                $('#DateOfBirthVal').show();
-            } else {
-                $('#applyForm').submit();
+function show(input, id) {
+    var fileTypes = ["Jpg", "png", "jpg", "jpeg", "PNG"];
+    if (input.files && input.files[0]) {
+        var filerdr = new FileReader();
+        var extension = input.files[0].name.split('.').pop().toLowerCase();
+        var isSuccess = fileTypes.indexOf(extension) > -1;
+        if (isSuccess) {
+            filerdr.onload = function(e) {
+                $('#' + id).attr('src', e.target.result);
             }
+            filerdr.readAsDataURL(input.files[0]);
         }
         else {
-            alert('Please read and agree terms and conditions!');
+            alert("Please select Image in this Format (Jpg,png,jpeg)");
         }
-        }
-    $('#DateOfBirthVal').hide();
-    $("#PostCode").autocomplete({  
-           source: function(request,response) {  
-               $.ajax({  
-                   url: "/ApplicationForm/SearchPostalCode",  
-                   type: "POST",  
-                   dataType: "json",  
-                   data: { Prefix: request.term },  
-                   success: function (data) {  
-                       debugger;
-                       response($.map(data, function (item) {
-                           return { label: item.text, value: item.value };  
-                       }))  
-  
-                   }  
-               })  
-           },  
-           messages: {  
-               noResults: "", results: ""  
-           }  
-       });
+    }
+}
 
-       $('#Dob').change(function () {
-        debugger
-            
-        var val = $(this).val();
-        if (val == '') {
+function submitForm() {
+    debugger;
+    let text = $('#ContactNumber').val();
+    let pattern = /^0[0-9]/;
+    let result = text.match(pattern);
+
+    if (result != null && ('#TermsAgreement').prop("checked")) {
+        if (!ValidateDateOfBirth(val)) {
+            $('#DateOfBirthVal').text("Please select age above 18 Years");
             $('#DateOfBirthVal').show();
-
         } else {
-            if (!ValidateDateOfBirth(val)) {
-                $('#DateOfBirthVal').text("Please select age above 18 Years");
-                $('#DateOfBirthVal').show();
-            } else {
-                $('#DateOfBirthVal').hide();
-            }
+            $('#applyForm').submit();
         }
-    });
+    }
+    else {
+        alert('Please read and agree terms and conditions!');
+    }
+}
+
+$('#DateOfBirthVal').hide();
+
+$("#PostCode").autocomplete({
+    source: function(request, response) {
+        $.ajax({
+            url: "/ApplicationForm/SearchPostalCode",
+            type: "POST",
+            dataType: "json",
+            data: { Prefix: request.term },
+            success: function(data) {
+                debugger;
+                response($.map(data, function(item) {
+                    return { label: item.text, value: item.value };
+                }))
+
+            }
+        })
+    },
+    messages: {
+        noResults: "No Result", results: "-00"
+    }
+});
+@*
+$("#AreaCode").autocomplete({
+    source: function(request, response) {
+        $.ajax({
+            url: "/ApplicationForm/SearchAreas",
+            type: "POST",
+            dataType: "json",
+            data: { Prefix: request.term },
+            success: function(data) {
+                debugger;
+                response($.map(data, function(item) {
+                    return { label: item.text, value: item.value };
+                }))
+            }
+        })
+    },
+    messages: {
+        noResults: "No Result", results: "-00"
+    }
+});*@
+
+$('#Dob').change(function() {
+    debugger
+
+    var val = $(this).val();
+    if (val == '') {
+        $('#DateOfBirthVal').show();
+
+    } else {
+        if (!ValidateDateOfBirth(val)) {
+            $('#DateOfBirthVal').text("Please select age above 18 Years");
+            $('#DateOfBirthVal').show();
+        } else {
+            $('#DateOfBirthVal').hide();
+        }
+    }
+});
 
 //document.ready(){
 //    const regex = "^0+[0-9]+";

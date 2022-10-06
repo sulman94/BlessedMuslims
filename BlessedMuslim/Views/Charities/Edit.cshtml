@@ -62,7 +62,18 @@
                 })
             </div>
         </div>
-
+         <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Charity Number</span>
+                    </div>
+                    @Html.EditorFor(model => model.CharityNumber, new
+                    {
+                        htmlAttributes =
+                        new { @class = "form-control", @maxlength = "30" }
+                    })
+                </div>
+            </div>
 
         <div class="col-12 col-md-6">
             <div class="input-group input-group-sm mb-3">
@@ -125,7 +136,7 @@
                 @Html.EditorFor(model => model.MobileNumber, new
                 {
                     htmlAttributes =
-                    new { @class = "form-control numbers-only" }
+                    new { @class = "form-control numbers-only" , minlength = 11, maxlength = 20}
                 })
             </div>
         </div>
@@ -146,11 +157,167 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text width-100" id="inputGroup-sizing-sm">Bank Name</span>
                 </div>
-                @Html.EditorFor(model => model.BankName, new
+                @*@Html.EditorFor(model => model.BankName, new
                 {
                     htmlAttributes =
                     new { @class = "form-control" }
-                })
+                })*@
+                                     @Html.DropDownListFor(model => model.BankName, new List<SelectListItem>{
+    new SelectListItem{ Text="Abbey National Treasury Services", Value="Abbey National Treasury Services"},
+new SelectListItem{ Text="ABC International Bank", Value="ABC International Bank"},
+new SelectListItem{ Text="Access Bank", Value="Access Bank"},
+new SelectListItem{ Text="Adam & Company", Value="Adam & Company"},
+new SelectListItem{ Text="ADIB", Value="ADIB"},
+new SelectListItem{ Text="Ahli United Bank", Value="Ahli United Bank"},
+new SelectListItem{ Text="AIB Group", Value="AIB Group"},
+new SelectListItem{ Text="Airdrie Savings Bank", Value="Airdrie Savings Bank"},
+new SelectListItem{ Text="Al Rayan Bank", Value="Al Rayan Bank"},
+new SelectListItem{ Text="Aldermore Bank", Value="Aldermore Bank"},
+new SelectListItem{ Text="Alliance Trust Savings", Value="Alliance Trust Savings"},
+new SelectListItem{ Text="Alpha Bank London", Value="Alpha Bank London"},
+new SelectListItem{ Text="ANZ Bank", Value="ANZ Bank"},
+new SelectListItem{ Text="Arbuthnot Latham & Co", Value="Arbuthnot Latham & Co"},
+new SelectListItem{ Text="Atom Bank", Value="Atom Bank"},
+new SelectListItem{ Text="Axis Bank", Value="Axis Bank"},
+new SelectListItem{ Text="Bank and Clients", Value="Bank and Clients"},
+new SelectListItem{ Text="Bank Leumi", Value="Bank Leumi"},
+new SelectListItem{ Text="Bank Mandiri", Value="Bank Mandiri"},
+new SelectListItem{ Text="Bank of America Merrill Lynch", Value="Bank of America Merrill Lynch"},
+new SelectListItem{ Text="Bank of Beirut", Value="Bank of Beirut"},
+new SelectListItem{ Text="Bank of Ceylon", Value="Bank of Ceylon"},
+new SelectListItem{ Text="Bank of China", Value="Bank of China"},
+new SelectListItem{ Text="Bank of Communications", Value="Bank of Communications"},
+new SelectListItem{ Text="Bank of Cyprus", Value="Bank of Cyprus"},
+new SelectListItem{ Text="Bank of Ireland", Value="Bank of Ireland"},
+new SelectListItem{ Text="Bank of London and The Middle East", Value="Bank of London and The Middle East"},
+new SelectListItem{ Text="Bank of New York Mellon", Value="Bank of New York Mellon"},
+new SelectListItem{ Text="Bank of Scotland", Value="Bank of Scotland"},
+new SelectListItem{ Text="Bank of the Philippine Islands", Value="Bank of the Philippine Islands"},
+new SelectListItem{ Text="Bank Saderat", Value="Bank Saderat"},
+new SelectListItem{ Text="Bank Sepah International", Value="Bank Sepah International"},
+new SelectListItem{ Text="Barclays Bank", Value="Barclays Bank"},
+new SelectListItem{ Text="BFC Exchange", Value="BFC Exchange"},
+new SelectListItem{ Text="BIRA Bank", Value="BIRA Bank"},
+new SelectListItem{ Text="BMCE Bank", Value="BMCE Bank"},
+new SelectListItem{ Text="British Arab Commercial Bank", Value="British Arab Commercial Bank"},
+new SelectListItem{ Text="Brown Shipley & Co", Value="Brown Shipley & Co"},
+new SelectListItem{ Text="C Hoare & Co", Value="C Hoare & Co"},
+new SelectListItem{ Text="CAF Bank", Value="CAF Bank"},
+new SelectListItem{ Text="Cambridge & Counties Bank", Value="Cambridge & Counties Bank"},
+new SelectListItem{ Text="Cater Allen", Value="Cater Allen"},
+new SelectListItem{ Text="Charity Bank", Value="Charity Bank"},
+new SelectListItem{ Text="Charter Court Financial Services", Value="Charter Court Financial Services"},
+new SelectListItem{ Text="China Construction Bank", Value="China Construction Bank"},
+new SelectListItem{ Text="CIBC World Markets", Value="CIBC World Markets"},
+new SelectListItem{ Text="ClearBank", Value="ClearBank"},
+new SelectListItem{ Text="Close Brothers", Value="Close Brothers"},
+new SelectListItem{ Text="Clydesdale Bank", Value="Clydesdale Bank"},
+new SelectListItem{ Text="Co-operative Bank", Value="Co-operative Bank"},
+new SelectListItem{ Text="Coutts & Company", Value="Coutts & Company"},
+new SelectListItem{ Text="Credit Suisse", Value="Credit Suisse"},
+new SelectListItem{ Text="Credit Suisse International", Value="Credit Suisse International"},
+new SelectListItem{ Text="Crown Agents Bank", Value="Crown Agents Bank"},
+new SelectListItem{ Text="DB UK Bank", Value="DB UK Bank"},
+new SelectListItem{ Text="Diamond Bank", Value="Diamond Bank"},
+new SelectListItem{ Text="Duncan Lawrie", Value="Duncan Lawrie"},
+new SelectListItem{ Text="EFG Private Bank", Value="EFG Private Bank"},
+new SelectListItem{ Text="Europe Arab Bank", Value="Europe Arab Bank"},
+new SelectListItem{ Text="FBN Bank", Value="FBN Bank"},
+new SelectListItem{ Text="FCE Bank", Value="FCE Bank"},
+new SelectListItem{ Text="FCMB Bank", Value="FCMB Bank"},
+new SelectListItem{ Text="Gatehouse Bank", Value="Gatehouse Bank"},
+new SelectListItem{ Text="GE Capital Bank", Value="GE Capital Bank"},
+new SelectListItem{ Text="Ghana International Bank", Value="Ghana International Bank"},
+new SelectListItem{ Text="Goldman Sachs International Bank", Value="Goldman Sachs International Bank"},
+new SelectListItem{ Text="Guaranty Trust Bank", Value="Guaranty Trust Bank"},
+new SelectListItem{ Text="Gulf International Bank", Value="Gulf International Bank"},
+new SelectListItem{ Text="Habib Bank Zurich", Value="Habib Bank Zurich"},
+new SelectListItem{ Text="Habibsons Bank", Value="Habibsons Bank"},
+new SelectListItem{ Text="Hampden & Co", Value="Hampden & Co"},
+new SelectListItem{ Text="Hampshire Trust Bank", Value="Hampshire Trust Bank"},
+new SelectListItem{ Text="Harrods Bank", Value="Harrods Bank"},
+new SelectListItem{ Text="Havin Bank", Value="Havin Bank"},
+new SelectListItem{ Text="HSBC Bank", Value="HSBC Bank"},
+new SelectListItem{ Text="HSBC Private Bank", Value="HSBC Private Bank"},
+new SelectListItem{ Text="HSBC Trust Company", Value="HSBC Trust Company"},
+new SelectListItem{ Text="ICBC", Value="ICBC"},
+new SelectListItem{ Text="ICBC Standard Bank", Value="ICBC Standard Bank"},
+new SelectListItem{ Text="ICICI Bank", Value="ICICI Bank"},
+new SelectListItem{ Text="Investec Bank", Value="Investec Bank"},
+new SelectListItem{ Text="Itau BBA International", Value="Itau BBA International"},
+new SelectListItem{ Text="J.P. Morgan Europe", Value="J.P. Morgan Europe"},
+new SelectListItem{ Text="J.P. Morgan International Bank", Value="J.P. Morgan International Bank"},
+new SelectListItem{ Text="J.P. Morgan Securities", Value="J.P. Morgan Securities"},
+new SelectListItem{ Text="Jordan International Bank", Value="Jordan International Bank"},
+new SelectListItem{ Text="Julian Hodge Bank", Value="Julian Hodge Bank"},
+new SelectListItem{ Text="Kexim Bank", Value="Kexim Bank"},
+new SelectListItem{ Text="Kingdom Bank", Value="Kingdom Bank"},
+new SelectListItem{ Text="Kleinwort Benson Bank", Value="Kleinwort Benson Bank"},
+new SelectListItem{ Text="Kookmin Bank", Value="Kookmin Bank"},
+new SelectListItem{ Text="Lloyds Bank", Value="Lloyds Bank"},
+new SelectListItem{ Text="Lloyds Bank Private Banking", Value="Lloyds Bank Private Banking"},
+new SelectListItem{ Text="Macquarie Bank", Value="Macquarie Bank"},
+new SelectListItem{ Text="Marks & Spencer", Value="Marks & Spencer"},
+new SelectListItem{ Text="Masthaven Bank", Value="Masthaven Bank"},
+new SelectListItem{ Text="Melli Bank", Value="Melli Bank"},
+new SelectListItem{ Text="Methodist Chapel Aid", Value="Methodist Chapel Aid"},
+new SelectListItem{ Text="Metro Bank", Value="Metro Bank"},
+new SelectListItem{ Text="Mizuho International", Value="Mizuho International"},
+new SelectListItem{ Text="Monzo Bank", Value="Monzo Bank"},
+new SelectListItem{ Text="Morgan Stanley Bank", Value="Morgan Stanley Bank"},
+new SelectListItem{ Text="National Bank of Egypt", Value="National Bank of Egypt"},
+new SelectListItem{ Text="National Bank of Kuwait", Value="National Bank of Kuwait"},
+new SelectListItem{ Text="NatWest", Value="NatWest"},
+new SelectListItem{ Text="Nomura Bank", Value="Nomura Bank"},
+new SelectListItem{ Text="Northern Bank", Value="Northern Bank"},
+new SelectListItem{ Text="Northern Trust", Value="Northern Trust"},
+new SelectListItem{ Text="OakNorth Bank", Value="OakNorth Bank"},
+new SelectListItem{ Text="OneSavings Bank", Value="OneSavings Bank"},
+new SelectListItem{ Text="Paragon Bank", Value="Paragon Bank"},
+new SelectListItem{ Text="PCF Group", Value="PCF Group"},
+new SelectListItem{ Text="Persia International Bank", Value="Persia International Bank"},
+new SelectListItem{ Text="Philippine National Bank", Value="Philippine National Bank"},
+new SelectListItem{ Text="Punjab National Bank", Value="Punjab National Bank"},
+new SelectListItem{ Text="QIB", Value="QIB"},
+new SelectListItem{ Text="R. Raphael & Sons", Value="R. Raphael & Sons"},
+new SelectListItem{ Text="Rathbone Investment Management", Value="Rathbone Investment Management"},
+new SelectListItem{ Text="RBC Europe", Value="RBC Europe"},
+new SelectListItem{ Text="Reliance Bank", Value="Reliance Bank"},
+new SelectListItem{ Text="Royal Bank of Scotland", Value="Royal Bank of Scotland"},
+new SelectListItem{ Text="Sainsbury’s Bank", Value="Sainsbury’s Bank"},
+new SelectListItem{ Text="Santander", Value="Santander"},
+new SelectListItem{ Text="Schroder & Co", Value="Schroder & Co"},
+new SelectListItem{ Text="Scotiabank Europe", Value="Scotiabank Europe"},
+new SelectListItem{ Text="Scottish Widows Bank", Value="Scottish Widows Bank"},
+new SelectListItem{ Text="Secure Trust Bank", Value="Secure Trust Bank"},
+new SelectListItem{ Text="SG Hambros Bank", Value="SG Hambros Bank"},
+new SelectListItem{ Text="Shawbrook Bank", Value="Shawbrook Bank"},
+new SelectListItem{ Text="Smith & Williamson", Value="Smith & Williamson"},
+new SelectListItem{ Text="Sonali Bank", Value="Sonali Bank"},
+new SelectListItem{ Text="Standard Chartered Bank", Value="Standard Chartered Bank"},
+new SelectListItem{ Text="Starling Bank", Value="Starling Bank"},
+new SelectListItem{ Text="Sumitomo Mitsui Banking Corporation Europe", Value="Sumitomo Mitsui Banking Corporation Europe"},
+new SelectListItem{ Text="Tandem Bank", Value="Tandem Bank"},
+new SelectListItem{ Text="TD Bank Europe", Value="TD Bank Europe"},
+new SelectListItem{ Text="Tesco Bank", Value="Tesco Bank"},
+new SelectListItem{ Text="TSB Bank", Value="TSB Bank"},
+new SelectListItem{ Text="Turkish Bank", Value="Turkish Bank"},
+new SelectListItem{ Text="UBS", Value="UBS"},
+new SelectListItem{ Text="Ulster Bank", Value="Ulster Bank"},
+new SelectListItem{ Text="Union Bank", Value="Union Bank"},
+new SelectListItem{ Text="Union Bank of India", Value="Union Bank of India"},
+new SelectListItem{ Text="United National Bank", Value="United National Bank"},
+new SelectListItem{ Text="United Trust Bank", Value="United Trust Bank"},
+new SelectListItem{ Text="Unity Trust Bank", Value="Unity Trust Bank"},
+new SelectListItem{ Text="Vanquis Bank", Value="Vanquis Bank"},
+new SelectListItem{ Text="Virgin Money", Value="Virgin Money"},
+new SelectListItem{ Text="VTB Capital", Value="VTB Capital"},
+new SelectListItem{ Text="Weatherbys Bank", Value="Weatherbys Bank"},
+new SelectListItem{ Text="Wesleyan Bank", Value="Wesleyan Bank"},
+new SelectListItem{ Text="Westpac", Value="Westpac"},
+new SelectListItem{ Text="Wyelands Bank", Value="Wyelands Bank"},
+new SelectListItem{ Text="Zenith Bank", Value="Zenith Bank"},
+    }, "--- Select Bank ---", new { @class = "form-control", required = "required" })
             </div>
         </div>
         <div class="col-12 col-md-6">
@@ -209,3 +376,36 @@
 </div>
 }
 
+<style>
+    .ui-autocomplete {
+        max-height: 200px;
+        overflow-y: auto;
+        /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+        /* add padding to account for vertical scrollbar */
+        padding-right: 20px;
+    }
+</style>
+
+<script type="text/javascript">
+    $("#PostCode").autocomplete({  
+           source: function(request,response) {  
+               $.ajax({  
+                   url: "/Retailers/SearchPostalCode",  
+                   type: "POST",  
+                   dataType: "json",  
+                   data: { Prefix: request.term },  
+                   success: function (data) {  
+                       debugger;
+                       response($.map(data, function (item) {
+                           return { label: item.text, value: item.value };  
+                       }))  
+  
+                   }  
+               })  
+           },  
+           messages: {  
+               noResults: "", results: ""  
+           }  
+       });
+</script>

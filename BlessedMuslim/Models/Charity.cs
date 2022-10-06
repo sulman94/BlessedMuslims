@@ -7,6 +7,7 @@ namespace BlessedMuslim.Models
     {
         public long Id { get; set; }
         public string CharityId { get; set; }
+        public string CharityNumber { get; set; }
         public string BusinessName { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
