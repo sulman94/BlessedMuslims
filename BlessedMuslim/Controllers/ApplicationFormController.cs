@@ -163,6 +163,7 @@ namespace BlessedMuslim.Controllers
                     dataApplication.RejectedBy = null;
                     dataApplication.RejectedDate = null;
                     dataApplication.ApprovedDate = DateTime.Now;
+                    dataApplication.IsActive = true;
                     if (dataApplication.ApprovedDate >= dataApplication.SubmitDate)
                     {
                         TempData["ApplicationFormSuccessMsg"] = "Profile has been successfully approved.";
@@ -195,6 +196,8 @@ namespace BlessedMuslim.Controllers
                     dataApplication.ApprovedBy = null;
                     dataApplication.ApprovedDate = null;
                     dataApplication.RejectedDate = DateTime.Now;
+                    dataApplication.IsActive = false;
+
                     if (dataApplication.RejectedDate >= dataApplication.SubmitDate)
                     {
                         TempData["ApplicationFormSuccessMsg"] = "Profile has been successfully Rejected.";
@@ -362,7 +365,7 @@ namespace BlessedMuslim.Controllers
         [AllowAnonymous]
         public async Task<JsonResult> SearchPostalCode(string Prefix)
         {
-            var context = new db_a8b5a4_blessedmuslimdbContext();
+            var context = new BlessedMuslim_DBContext();
             SelectList lstPostalCodes = new SelectList(await context.UkPostalCodes.Where(x => x.AreaName.Contains(Prefix)).Select(x => new { x.PostCode, PostalCode = x.AreaName + ", " + x.PostCode }).Take(30).ToListAsync(), "PostCode", "PostalCode");
             return Json(lstPostalCodes);
         }
@@ -371,7 +374,7 @@ namespace BlessedMuslim.Controllers
         [AllowAnonymous]
         public async Task<JsonResult> SearchAreas(string Prefix)
         {
-            var context = new db_a8b5a4_blessedmuslimdbContext();
+            var context = new BlessedMuslim_DBContext();
             SelectList lstAreas = new SelectList(await context.Areas.Where(x => x.AreaName.Contains(Prefix)).Select(x => new { x.AreaCode, PostalCode = x.AreaName + ", " + x.AreaCode }).Take(30).ToListAsync(), "AreaCode", "AreaName");
             return Json(lstAreas);
         }

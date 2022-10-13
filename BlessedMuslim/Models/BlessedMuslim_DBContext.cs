@@ -27,16 +27,20 @@ namespace BlessedMuslim.Models
         public virtual DbSet<DsrApplicationForm> DsrApplicationForm { get; set; }
         public virtual DbSet<HubAreas> HubAreas { get; set; }
         public virtual DbSet<HubMaster> HubMaster { get; set; }
+        public virtual DbSet<MasterAddresses> MasterAddresses { get; set; }
         public virtual DbSet<PaymentDetails> PaymentDetails { get; set; }
         public virtual DbSet<Retailers> Retailers { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<States> States { get; set; }
+        public virtual DbSet<UkPostalCodes> UkPostalCodes { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<RetailerContracts> RetailerContracts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
                 .AddJsonFile("appsettings.json")
@@ -47,8 +51,37 @@ namespace BlessedMuslim.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
+            modelBuilder.HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
+            modelBuilder.Entity<RetailerContracts>(entity =>
+            {
+                entity.Property(e => e.AccNo)
+                    .HasColumnName("Acc_No")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
+                entity.Property(e => e.CommissionPercentage).HasColumnType("numeric(18, 2)");
+
+                entity.Property(e => e.ContractAmount).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.ContractDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ContractPeriod)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ContractSignedBy)
+                    .HasMaxLength(450)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.SortCode)
+                    .HasColumnName("Sort_code")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StartDate).HasColumnType("datetime");
+            });
             modelBuilder.Entity<Areas>(entity =>
             {
                 entity.Property(e => e.AreaCode)
@@ -112,9 +145,9 @@ namespace BlessedMuslim.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.CharityNumber)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                   .IsRequired()
+                   .HasMaxLength(50)
+                   .IsUnicode(false);
 
                 entity.Property(e => e.CharityId)
                     .IsRequired()
@@ -308,6 +341,13 @@ namespace BlessedMuslim.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<MasterAddresses>(entity =>
+            {
+                entity.Property(e => e.AddressName)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<PaymentDetails>(entity =>
             {
                 entity.Property(e => e.AmountDue).HasColumnType("decimal(18, 2)");
@@ -321,8 +361,8 @@ namespace BlessedMuslim.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Comments)
-                .HasMaxLength(500)
-                .IsUnicode(false);
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.PaymentMode)
                     .HasMaxLength(50)
@@ -333,7 +373,7 @@ namespace BlessedMuslim.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.TransactionNumber).HasMaxLength(450);
-
+           
             });
 
             modelBuilder.Entity<Retailers>(entity =>
@@ -413,6 +453,40 @@ namespace BlessedMuslim.Models
                     .WithMany(p => p.States)
                     .HasForeignKey(d => d.CountryId)
                     .HasConstraintName("FK_States_Country");
+            });
+
+            modelBuilder.Entity<UkPostalCodes>(entity =>
+            {
+                entity.ToTable("UK_PostalCodes");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.AreaCode)
+                    .IsRequired()
+                    .HasColumnName("Area_Code")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AreaName)
+                    .HasColumnName("Area_Name")
+                    .HasMaxLength(55)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.County)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.District)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PostCode)
+                    .IsRequired()
+                    .HasColumnName("Post_Code")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Region).IsUnicode(false);
             });
 
             modelBuilder.Entity<Users>(entity =>

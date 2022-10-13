@@ -154,12 +154,13 @@ namespace BlessedMuslim.Controllers
         [AllowAnonymous]
         public async Task<JsonResult> SearchPostalCode(string Prefix)
         {
-            var context = new db_a8b5a4_blessedmuslimdbContext();
+            var context = new BlessedMuslim_DBContext();
 
             SelectList lstPostalCodes = new SelectList(await context.UkPostalCodes.Where(x => x.AreaName.Contains(Prefix)).Select(x => new { x.PostCode, PostalCode = x.AreaName + ", " + x.PostCode }).ToListAsync(), "PostCode", "PostalCode");
 
             return Json(lstPostalCodes);
         }
+
         //// GET: Retailers
         //public async Task<IActionResult> Index()
         //{

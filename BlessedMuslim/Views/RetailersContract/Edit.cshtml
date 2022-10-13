@@ -1,0 +1,197 @@
+﻿@model BlessedMuslim.Models.RetailerContracts;
+@{
+    ViewData["Title"] = "Add Retailer Contracts";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h6>Add New Retailer Contracts</h6>
+        <hr />
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Contract Number</span>
+                    </div>
+                    @Html.EditorFor(model => model.ContractId, new
+                    {
+                        htmlAttributes =
+                        new { @class = "form-control", required = "required", disabled = "disabled" }
+                    })
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Retailer</span>
+                    </div>
+                    @Html.DropDownListFor(model => model.RetailerId, (IEnumerable<SelectListItem>)ViewBag.RetailerId, "--- Select Retailer ---", new { @class = "form-control", required = "required" })
+
+                </div>
+            </div>
+             <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Contract Date</span>
+                    </div>
+                    @Html.EditorFor(model => model.ContractDate, new
+                    {
+                        htmlAttributes =
+                        new { @class = "form-control", required = "required", type = "date" }
+                    })
+                </div>
+            </div>
+             <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Contract Period</span>
+                    </div>
+                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Half  &nbsp;  &nbsp;   
+    @Html.RadioButtonFor(model => model.ContractPeriod, "H")  
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Full      &nbsp;&nbsp;
+    @Html.RadioButtonFor(model => model.ContractPeriod, "F")
+    @Html.ValidationMessageFor(model => model.ContractPeriod)
+                    @*@Html.RadioButtonFor(m => m.ContractPeriod,"Half",new
+                    {
+                        htmlAttributes =
+                        new { @class = "form-control", required = "required" }
+                    })
+                    @Html.RadioButtonFor(m => m.ContractPeriod,"Full",new
+                    {
+                        htmlAttributes =
+                        new { @class = "form-control", required = "required" }
+                    })*@
+                    @*@Html.EditorFor(model => model.ContractPeriod, new
+                    {
+                        htmlAttributes =
+                        new { @class = "form-control", required = "required" }
+                    })*@
+                </div>
+            </div>
+             <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Start Date</span>
+                    </div>
+                    @Html.EditorFor(model => model.StartDate, new
+                    {
+                        htmlAttributes =
+                        new { @class = "form-control", type = "date" }
+                    })
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">End Date</span>
+                    </div>
+                    @Html.EditorFor(model => model.EndDate, new
+                    {
+                        htmlAttributes =
+                        new { @class = "form-control", type = "date" }
+                    })
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Account Number</span>
+                    </div>
+                    @Html.EditorFor(model => model.AccNo, new
+           {
+               htmlAttributes =
+                new { @class = "form-control number-only",  maxlength = 10, type = "number", oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" }
+           })
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Sort Code</span>
+                    </div>
+                    @Html.EditorFor(model => model.SortCode, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", @pattern = "[0-9]{2}-[0-9]{2}-[0-9]{2}", @placeholder = "XX-XX-XX", maxlength = 8 }
+               })
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Commission (%)</span>
+                    </div>
+                    @Html.EditorFor(model => model.CommissionPercentage, new
+               {
+                   htmlAttributes =
+                        new { @class = "form-control", @pattern = "[0-9]{2}.[0-9]{2}", @placeholder = "XX.XX",maxlength = 5  }
+               })
+                @Html.ValidationMessageFor(model => model.CommissionPercentage)
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Contract Amount</span>
+                    </div>
+                    @Html.EditorFor(model => model.ContractAmount, new
+                    {
+                        htmlAttributes =
+                new { @class = "form-control number-only",required = "required" }
+                    })
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Contract Signed By</span>
+                    </div>
+                    @Html.EditorFor(model => model.ContractSignedBy, new
+                    {
+                        htmlAttributes =
+                        new { @class = "form-control", required = "required" ,  maxlength = 50}
+                    })
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text width-100" id="inputGroup-sizing-sm">Sale Rep</span>
+                    </div>
+                    @Html.DropDownListFor(model => model.SaleRepId, (IEnumerable<SelectListItem>)ViewBag.SaleRepId, "--- Select Sale Rep ---", new { @class = "form-control" })
+
+                </div>
+            </div>           
+        </div>
+         <div class="row">
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-dark" />
+                </div>
+            </div>
+        </div>
+        
+
+        @if (!String.IsNullOrEmpty(ViewBag.error))
+        {
+            <div class="mt-2">
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.error
+                </div>
+            </div>
+        }
+
+        @if (!String.IsNullOrEmpty(ViewBag.result))
+        {
+            <div class="mt-2">
+                <div class="alert alert-success" role="alert">
+                    @ViewBag.result
+                </div>
+            </div>
+        }
+
+    </div>
+}
