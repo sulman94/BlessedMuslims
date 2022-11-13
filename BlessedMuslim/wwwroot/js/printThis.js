@@ -266,7 +266,7 @@
         }, 333);
 
     };
-
+    var opt;
     // defaults
     $.fn.printThis.defaults = {
         debug: false,           // show the iframe for debugging
@@ -278,7 +278,6 @@
         removeInline: false,    // remove all inline styles
         removeInlineSelector: "*", // custom jquery selectors for remove selected inline styles. (removeInline = true required)
         printDelay: 333,        // variable print delay(function ($) {
-        var opt;
 
         $.fn.printThis = function (options) {
             opt = $.extend({}, $.fn.printThis.defaults, options);
@@ -330,15 +329,14 @@
                     (200)
                 );
             }, 333);
-        }
-
+        },
 
         $.fn.printThis.defaults = {
             debug: false, //show the iframe for debugging
             importCSS: true, // import page CSS
             printContainer: true, // grab outer container as well as the contents of the selector
             loadCSS: "" //path to additional css file
-        };
+        },
 
 
         jQuery.fn.outer = function () {
