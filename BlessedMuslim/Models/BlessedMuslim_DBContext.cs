@@ -35,6 +35,7 @@ namespace BlessedMuslim.Models
         public virtual DbSet<UkPostalCodes> UkPostalCodes { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<RetailerContracts> RetailerContracts { get; set; }
+        public virtual DbSet<ContractPayments> ContractPayments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -521,6 +522,25 @@ namespace BlessedMuslim.Models
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.RoleId)
                     .HasConstraintName("FK_Users_Role");
+            });
+
+            modelBuilder.Entity<ContractPayments>(entity =>
+            {
+                entity.ToTable("ContractPayments", "dbo");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Comments)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ContractId).HasColumnName("ContractID");
+
+                entity.Property(e => e.RefNumber)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TransactionDate).HasColumnType("datetime");
             });
         }
     }
