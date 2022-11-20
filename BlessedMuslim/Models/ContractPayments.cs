@@ -8,7 +8,7 @@ namespace BlessedMuslim.Models
         public long Id { get; set; }
         public long? SaleRepId { get; set; }
         public long? RetailerId { get; set; }
-        public long? ContractId { get; set; }
+        public string ContractId { get; set; }
         public string RefNumber { get; set; }
         public DateTime? TransactionDate { get; set; }
         public string Comments { get; set; }

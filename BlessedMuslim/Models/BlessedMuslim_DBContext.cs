@@ -534,8 +534,6 @@ namespace BlessedMuslim.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ContractId).HasColumnName("ContractID");
-
                 entity.Property(e => e.RefNumber)
                     .HasMaxLength(50)
                     .IsUnicode(false);
