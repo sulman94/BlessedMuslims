@@ -324,9 +324,12 @@ function submitForm() {
     let text = $('#ContactNumber').val();
     let pattern = /^0[0-9]/;
     let result = text.match(pattern);
-
-    if (result != null && ('#TermsAgreement').prop("checked")) {
-        if (!ValidateDateOfBirth(val)) {
+    if (result == null) {
+        alert("Invalid Contact Number Format");
+        return;
+    }
+    if (result != null && $('#TermsAgreement').prop("checked")) {
+        if (!ValidateDateOfBirth($('#Dob').val())) {
             $('#DateOfBirthVal').text("Please select age above 18 Years");
             $('#DateOfBirthVal').show();
         } else {

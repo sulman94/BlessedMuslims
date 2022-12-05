@@ -261,20 +261,23 @@
 </style>
 
 <script type="text/javascript">
-    function submitForm() {
-        debugger;
+function submitForm() {
+    debugger;
 
-         let text = $('#MobileNumber').val();
-            let pattern = /^0[0-9]/;
-            let result = text.match(pattern);
-
-        if (result!= null && $('#TermsAgreement').prop("checked")) {
-            $('#registerForm').submit();
-        }
-        else {
-            alert('Please read and agree terms and conditions!');
-        }
+    let text = $('#MobileNumber').val();
+    let pattern = /^0[0-9]/;
+    let result = text.match(pattern);
+    if (result == null) {
+        alert("Invalid Contact Number Format");
+        return;
     }
+    if (result != null && $('#TermsAgreement').prop("checked")) {
+        $('#registerForm').submit();
+    }
+    else {
+        alert('Please read and agree terms and conditions!');
+    }
+}
 
     $("#PostCode").autocomplete({  
            source: function(request,response) {  
